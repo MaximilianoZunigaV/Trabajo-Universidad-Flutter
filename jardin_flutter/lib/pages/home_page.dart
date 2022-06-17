@@ -6,7 +6,7 @@ import 'package:jardin_flutter/pages/tabs/niveles_tab.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
           ),
           body: TabBarView(
             children: [
-              EstudianteTab(),
+              EstudiantesTab(),
               EducadorasTab(),
               EventosTab(),
               NivelesTab(),

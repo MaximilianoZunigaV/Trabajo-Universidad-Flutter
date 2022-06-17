@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jardin_flutter/providers/estudiantes_provider.dart';
+import 'package:jardin_flutter/providers/providers_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class EstudianteTab extends StatelessWidget {
-  const EstudianteTab({Key? key}) : super(key: key);
+class EstudiantesTab extends StatelessWidget {
+  const EstudiantesTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
