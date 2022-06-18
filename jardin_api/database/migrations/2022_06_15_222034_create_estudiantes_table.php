@@ -18,7 +18,7 @@ return new class extends Migration
             // Se le puse id(); para quitar error en evento, tratar de cambiar mas adelante
 
             //$table->string('cod_estudiante')->primary();
-            $table->id();
+            $table->string('cod_estudiante')->primary();
             $table->string('nombre');
             $table->string('apellido');
             $table->integer('edad');

@@ -11,7 +11,11 @@ class Estudiante extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'estudiantes';
+    protected $primaryKey = 'cod_estudiante';
+    public $incrementing = false;
+    protected $keyType = 'string';
     public $timestamps = false;
+
 
     public function nivel(){
         return $this->belongsTo(Nivel::class); 

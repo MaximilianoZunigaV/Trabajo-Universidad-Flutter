@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('eventos', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id')->primary();
             $table->string('nombre');
             $table->string('descripcion');
             $table->date('fecha'); //CAMBIAR A DATETIME para tambien tener hora y minutos

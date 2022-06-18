@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('niveles', function (Blueprint $table) {
-            $table->id();
+            //$table->integer('id')->primary()->increments();
+            $table->increments('id');
             $table->string('nombre');
             $table->softDeletes();
             //$table->timestamps();

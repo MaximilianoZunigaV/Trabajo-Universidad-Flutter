@@ -11,6 +11,9 @@ class Nivel extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'niveles';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'integer';
     public $timestamps = false;
 
     public function estudiantes(){

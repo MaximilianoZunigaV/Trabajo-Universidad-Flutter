@@ -20,9 +20,9 @@ class _HomePageState extends State<HomePage> {
         length: 4,
         child: Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             bottom: TabBar(
               //isScrollable: false,
-
               tabs: [
                 Tab(
                   text: 'Niños',

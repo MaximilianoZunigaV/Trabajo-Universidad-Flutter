@@ -16,7 +16,11 @@ class Evento extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'eventos';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'integer';
     public $timestamps = false;
+
 
     
     public function estudiante(){

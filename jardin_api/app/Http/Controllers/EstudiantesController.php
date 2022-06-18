@@ -26,6 +26,7 @@ class EstudiantesController extends Controller
     public function store(Request $request)
     {
         $estudiante = new Estudiante();
+        $estudiante -> cod_estudiante = $request -> cod_estudiante;
         $estudiante -> nombre = $request -> nombre;
         $estudiante -> apellido = $request->apellido;
         $estudiante -> edad = $request-> edad;
@@ -54,7 +55,8 @@ class EstudiantesController extends Controller
      */
   
     public function update(Request $request, Estudiante $estudiante)
-    {
+    {   
+        $estudiante -> cod_estudiante = $request -> cod_estudiante;
         $estudiante -> nombre = $request -> nombre;
         $estudiante -> apellido = $request->apellido;
         $estudiante -> edad = $request-> edad;
