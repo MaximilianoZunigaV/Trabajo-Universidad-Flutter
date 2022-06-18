@@ -52,10 +52,13 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
                           ),
                         ),
                         child: ListTile(
-                          leading: Icon(MdiIcons.cube),
+                          leading: Icon(
+                            MdiIcons.foodApple,
+                            color: Color.fromARGB(255, 143, 195, 80),
+                          ),
                           title:
                               Text('${alumn['nombre']} ${alumn['apellido']}'),
-                          //subtitle: Text('Nivel: ${niv['nombre']}'),
+                          subtitle: Text('Codigo: ${alumn['cod_estudiante']}'),
                           trailing: Text('Edad: ${alumn['edad']}'),
                         ),
                       );
@@ -68,8 +71,10 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
             //agregar
             Container(
               width: double.infinity,
-              child: ElevatedButton(
-                child: Text('Agregar Estudiante'),
+              child: FloatingActionButton(
+                child: Icon(MdiIcons.plusThick),
+                elevation: 50.0,
+                backgroundColor: Color.fromARGB(255, 242, 76, 5),
                 onPressed: () {
                   MaterialPageRoute route =
                       MaterialPageRoute(builder: (context) {

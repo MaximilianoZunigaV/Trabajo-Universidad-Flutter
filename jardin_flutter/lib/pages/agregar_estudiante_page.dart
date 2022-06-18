@@ -26,6 +26,7 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Estudiante'),
+        backgroundColor: Color.fromARGB(255, 242, 76, 5),
       ),
       body: Form(
         key: formKey,
@@ -33,6 +34,7 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
           padding: EdgeInsets.all(8.0),
           child: ListView(
             children: [
+              Container(),
               TextFormField(
                 controller: codigoCtrl,
                 decoration: InputDecoration(labelText: 'Codigo'),
@@ -95,8 +97,8 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
 
                     if (respuesta['message'] != null) {
                       //codigo
-                      if (respuesta['errors']['codigo'] != null) {
-                        errApellido = respuesta['errors']['codigo'][0];
+                      if (respuesta['errors']['cod_estudiante'] != null) {
+                        errCodigo = respuesta['errors']['cod_estudiante'][0];
                       }
 
                       //nombre
@@ -113,7 +115,10 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                     }
 
                     Navigator.pop(context);
-                  },
+                  }, //Fuera de onPressed
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 143, 195, 80),
+                  ), //Cambiar color del boton
                 ),
               ),
             ],

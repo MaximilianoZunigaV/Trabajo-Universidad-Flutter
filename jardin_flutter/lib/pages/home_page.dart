@@ -42,9 +42,17 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            title: Text('Jardin Semillita'),
+            title: Text(
+              'Jardin Semillita',
+              style: TextStyle(
+                color: Color.fromARGB(255, 143, 195, 80),
+              ),
+            ),
             backgroundColor: Color.fromARGB(255, 242, 76, 5),
-            leading: Icon(MdiIcons.seed),
+            leading: Icon(
+              MdiIcons.seed,
+              color: Color.fromARGB(255, 143, 195, 80),
+            ),
           ),
           body: TabBarView(
             children: [
