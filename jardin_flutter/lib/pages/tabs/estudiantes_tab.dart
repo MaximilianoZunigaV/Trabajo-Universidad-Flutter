@@ -13,7 +13,7 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(0),
         child: Column(
           children: [
             Expanded(
@@ -59,7 +59,7 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
                           title:
                               Text('${alumn['nombre']} ${alumn['apellido']}'),
                           subtitle: Text('Codigo: ${alumn['cod_estudiante']}'),
-                          trailing: Text('Edad: ${alumn['edad']}'),
+                          trailing: Text('Edad: ${alumn['edad']} años'),
                         ),
                       );
                     },

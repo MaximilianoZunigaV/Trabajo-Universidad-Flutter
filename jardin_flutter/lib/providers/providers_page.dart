@@ -51,6 +51,8 @@ class Providers {
     return respuesta.statusCode == 200;
   }
 
+  /////////////////NIVELES////////////////////////////
+
   //lista de Niveles
   Future<List<dynamic>> getNiveles() async {
     var uri = Uri.parse('$apiURL/niveles');
@@ -63,6 +65,23 @@ class Providers {
     }
   }
 
+  //Agregar Nivel
+  Future<LinkedHashMap<String, dynamic>> nivelAgregar(String nombre) async {
+    var uri = Uri.parse('$apiURL/niveles');
+    var respuesta = await http.post(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'nombre': nombre,
+        }));
+
+    return json.decode(respuesta.body);
+  }
+
+////////////////////////EDUCADORAS////////////////////////
+  ///
   //lista de educadoras
   Future<List<dynamic>> getEducadoras() async {
     var uri = Uri.parse('$apiURL/educadoras');
@@ -75,6 +94,28 @@ class Providers {
     }
   }
 
+  //agregar educadora
+  Future<LinkedHashMap<String, dynamic>> educadoraAgregar(String cod_educadora,
+      String nombre, String apellido, String email, int niveles_id) async {
+    var uri = Uri.parse('$apiURL/educadoras');
+    var respuesta = await http.post(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'cod_educadora': cod_educadora,
+          'nombre': nombre,
+          'apellido': apellido,
+          'email': email,
+          'niveles_id': niveles_id,
+        }));
+
+    return json.decode(respuesta.body);
+  }
+
+////////////////////////EVENTOS//////////////////////////////
+  ///
   //lista de eventos
   Future<List<dynamic>> getEventos() async {
     var uri = Uri.parse('$apiURL/eventos');

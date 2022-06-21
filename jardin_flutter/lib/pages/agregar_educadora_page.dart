@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:jardin_flutter/pages/tabs/niveles_tab.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
-
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-class AgregarEstudiante extends StatefulWidget {
-  AgregarEstudiante({Key? key}) : super(key: key);
+class AgregarEducadora extends StatefulWidget {
+  AgregarEducadora({Key? key}) : super(key: key);
 
   @override
-  State<AgregarEstudiante> createState() => _AgregarEstudianteState();
+  State<AgregarEducadora> createState() => _AgregarEducadoraState();
 }
 
-class _AgregarEstudianteState extends State<AgregarEstudiante> {
+class _AgregarEducadoraState extends State<AgregarEducadora> {
   final formKey = GlobalKey<FormState>();
 
   TextEditingController codigoCtrl = TextEditingController();
   TextEditingController nombreCtrl = TextEditingController();
   TextEditingController apellidoCtrl = TextEditingController();
-  TextEditingController EdadCtrl = TextEditingController();
+  TextEditingController emailCtrl = TextEditingController();
 
   String errCodigo = '';
   String errNombre = '';
@@ -58,7 +56,7 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Estudiante'),
+        title: Text('Educadora'),
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
       ),
       body: Form(
@@ -102,26 +100,16 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                 ),
               ),
               TextFormField(
-                controller: EdadCtrl,
-                decoration: InputDecoration(labelText: 'Edad'),
-                keyboardType: TextInputType.number,
+                controller: emailCtrl,
+                decoration: InputDecoration(labelText: 'Email'),
+                keyboardType: TextInputType.emailAddress,
               ),
-              // TextFormField(
-              //   controller: NivelCtrl,
-              //   decoration: InputDecoration(
-              //       labelText: 'Nivel',
-              //       hintText: 'Solo numeros del 1 al 3',
-              //       helperText:
-              //           '(1)Medio Menor   (2)Medio Mayor   (3)Playground'),
-              //   keyboardType: TextInputType.number,
-              // ),
               Text(''),
               Text(''),
               Text(
                 'Nivel',
                 style: TextStyle(fontSize: 16, color: Colors.black54),
               ),
-
               DropdownButton(
                   //Nuevo Widget :D //Agregar para que sea con base de datos
                   isExpanded: true,
@@ -141,28 +129,24 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                           niveles['nombre']), //muesta en pantalla el nombre
                     );
                   }).toList()),
-
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
-                  child: Text('Agregar Estudiante'),
+                  child: Text('Agregar Educadora'),
                   onPressed: () async {
-                    int edad = int.tryParse(EdadCtrl.text) ?? 0;
-                    //int niveles_id = int.tryParse(NivelCtrl.text) ?? 0;
-
-                    var respuesta = await Providers().estudiantesAgregar(
+                    var respuesta = await Providers().educadoraAgregar(
                       codigoCtrl.text.trim(),
                       nombreCtrl.text.trim(),
                       apellidoCtrl.text.trim(),
-                      edad,
-                      dropdownValue, //toma el valor de la id seleccionada (desde el DropDownButton),
+                      emailCtrl.text.trim(),
+                      dropdownValue,
                       //BigInt.from(nivel), //transformar a BigInt
                     );
 
                     if (respuesta['message'] != null) {
                       //codigo
-                      if (respuesta['errors']['cod_estudiante'] != null) {
-                        errCodigo = respuesta['errors']['cod_estudiante'][0];
+                      if (respuesta['errors']['cod_educadora'] != null) {
+                        errCodigo = respuesta['errors']['cod_educadora'][0];
                       }
 
                       //nombre
