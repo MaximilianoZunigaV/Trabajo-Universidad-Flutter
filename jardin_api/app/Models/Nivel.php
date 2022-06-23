@@ -11,9 +11,9 @@ class Nivel extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'niveles';
-    protected $primaryKey = 'id';
-    public $incrementing = true;
-    protected $keyType = 'integer';
+    // protected $primaryKey = 'id';
+    // public $incrementing = true;
+    // protected $keyType = 'integer';
     public $timestamps = false;
 
     public function estudiantes(){
@@ -21,6 +21,6 @@ class Nivel extends Model
     }
 
     public function educadoras(){
-        return $this->hasMany(Estudiante::class);
+        return $this->hasMany(Educadora::class);
     }
 }

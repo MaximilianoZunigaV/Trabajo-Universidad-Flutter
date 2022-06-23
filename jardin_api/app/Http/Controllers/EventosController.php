@@ -29,7 +29,7 @@ class EventosController extends Controller
         $evento->nombre = $request->nombre;
         $evento->descripcion = $request -> descripcion;
         $evento->fecha = $request -> fecha;
-        $evento -> estudiante_id = $request-> estudiante_id;
+        $evento -> estudiante_cod = $request-> estudiante_cod;
         $evento->save();
         return $evento;
     }
@@ -57,7 +57,7 @@ class EventosController extends Controller
         $evento->nombre = $request->nombre;
         $evento->descripcion = $request -> descripcion;
         $evento->fecha = $request -> fecha;
-        $evento -> estudiante_id = $request-> estudiante_id;
+        $evento -> estudiante_cod = $request-> estudiante_cod;
         $evento->save();
         return $evento;
     }
@@ -68,8 +68,8 @@ class EventosController extends Controller
      * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Evento $evento)
+    public function destroy($evento)
     {
-        return $evento->delete();
+        Evento::where('id', $evento)->delete();
     }
 }

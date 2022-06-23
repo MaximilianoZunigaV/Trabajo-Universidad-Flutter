@@ -65,7 +65,7 @@ class EducadorasController extends Controller
      * @param  \App\Models\Educadora  $educadora
      * @return \Illuminate\Http\Response
      */
-    public function update(EducadoraEditarRequest $request, Educadora $educadora)
+    public function update(Request $request, Educadora $educadora)
     {
         $educadora -> cod_educadora = $request->cod_educadora;
         $educadora -> nombre = $request -> nombre;

@@ -73,8 +73,8 @@ class NivelesController extends Controller
      * @param  \App\Models\Nivel  $nivel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nivel $nivel)
-    {
-        return $nivel->delete();
+    public function destroy($nivel)
+    {   
+        Nivel::where('id', $nivel)->delete();
     }
 }

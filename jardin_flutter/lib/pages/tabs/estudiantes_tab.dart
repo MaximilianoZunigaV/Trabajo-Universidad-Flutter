@@ -70,10 +70,11 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
 
             //agregar
             Container(
+              color: Colors.green,
               width: double.infinity,
               child: FloatingActionButton(
                 child: Icon(MdiIcons.plusThick),
-                elevation: 50.0,
+                elevation: 10.0,
                 backgroundColor: Color.fromARGB(255, 242, 76, 5),
                 onPressed: () {
                   MaterialPageRoute route =
