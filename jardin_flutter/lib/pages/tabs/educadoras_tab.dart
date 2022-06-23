@@ -69,7 +69,7 @@ class _EducadorasTabState extends State<EducadorasTab> {
 
             //agregar
             Container(
-              width: double.infinity,
+              //width: double.infinity,
               child: FloatingActionButton(
                 child: Icon(MdiIcons.plusThick),
                 elevation: 50.0,

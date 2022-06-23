@@ -40,8 +40,10 @@ class EventosController extends Controller
      * @param  \App\Models\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function show(Evento $evento)
+    public function show($evento)
     {
+        //return $evento;
+        //Evento::where('id', $evento);
         return $evento;
     }
 

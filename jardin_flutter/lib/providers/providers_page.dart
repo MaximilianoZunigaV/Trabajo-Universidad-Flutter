@@ -22,11 +22,7 @@ class Providers {
 
   //Agregar estudiante
   Future<LinkedHashMap<String, dynamic>> estudiantesAgregar(
-      String cod_estudiante,
-      String nombre,
-      String apellido,
-      int edad,
-      int niveles_id) async {
+      String nombre, String apellido, int edad, int niveles_id) async {
     var uri = Uri.parse('$apiURL/estudiantes');
     var respuesta = await http.post(uri,
         headers: <String, String>{
@@ -34,7 +30,6 @@ class Providers {
           'Accept': 'application/json'
         },
         body: jsonEncode(<String, dynamic>{
-          'cod_estudiante': cod_estudiante,
           'nombre': nombre,
           'apellido': apellido,
           'edad': edad,
@@ -114,8 +109,8 @@ class Providers {
     return json.decode(respuesta.body);
   }
 
-////////////////////////EVENTOS//////////////////////////////
-  ///
+////////////////////////EVENTOS///////////////////////////
+
   //lista de eventos
   Future<List<dynamic>> getEventos() async {
     var uri = Uri.parse('$apiURL/eventos');
@@ -126,5 +121,26 @@ class Providers {
     } else {
       return [];
     }
+  }
+
+  //agregar evento
+
+  //HAY QUE CAMBIAR String fecha a un DateTime
+  Future<LinkedHashMap<String, dynamic>> eventoAgregar(String nombre,
+      String descripcion, String fecha, int estudiante_id) async {
+    var uri = Uri.parse('$apiURL/eventos');
+    var respuesta = await http.post(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'nombre': nombre,
+          'descripcion': descripcion,
+          'fecha': fecha,
+          'estudiante_cod': estudiante_id,
+        }));
+
+    return json.decode(respuesta.body);
   }
 }

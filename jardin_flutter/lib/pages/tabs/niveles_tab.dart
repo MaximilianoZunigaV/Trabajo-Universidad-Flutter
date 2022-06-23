@@ -67,7 +67,7 @@ class _NivelesTabState extends State<NivelesTab> {
 
             //agregar
             Container(
-              width: double.infinity,
+              //width: double.infinity,
               child: FloatingActionButton(
                 child: Icon(MdiIcons.plusThick),
                 elevation: 50.0,

@@ -13,7 +13,7 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(0),
+        padding: EdgeInsets.all(5),
         child: Column(
           children: [
             Expanded(
@@ -58,7 +58,7 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
                           ),
                           title:
                               Text('${alumn['nombre']} ${alumn['apellido']}'),
-                          subtitle: Text('Codigo: ${alumn['cod_estudiante']}'),
+                          subtitle: Text('Id: ${alumn['id']}'),
                           trailing: Text('Edad: ${alumn['edad']} años'),
                         ),
                       );
@@ -70,11 +70,11 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
 
             //agregar
             Container(
-              color: Colors.green,
-              width: double.infinity,
+              //width: double.infinity,
               child: FloatingActionButton(
+                isExtended: false,
                 child: Icon(MdiIcons.plusThick),
-                elevation: 10.0,
+                elevation: 100.0,
                 backgroundColor: Color.fromARGB(255, 242, 76, 5),
                 onPressed: () {
                   MaterialPageRoute route =

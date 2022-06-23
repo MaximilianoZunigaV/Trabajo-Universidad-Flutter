@@ -16,7 +16,6 @@ class AgregarEstudiante extends StatefulWidget {
 class _AgregarEstudianteState extends State<AgregarEstudiante> {
   final formKey = GlobalKey<FormState>();
 
-  TextEditingController codigoCtrl = TextEditingController();
   TextEditingController nombreCtrl = TextEditingController();
   TextEditingController apellidoCtrl = TextEditingController();
   TextEditingController EdadCtrl = TextEditingController();
@@ -68,17 +67,6 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
           child: ListView(
             children: [
               Container(),
-              TextFormField(
-                controller: codigoCtrl,
-                decoration: InputDecoration(labelText: 'Codigo'),
-              ),
-              Container(
-                width: double.infinity,
-                child: Text(
-                  errCodigo,
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
               TextFormField(
                 controller: nombreCtrl,
                 decoration: InputDecoration(labelText: 'Nombre'),
@@ -151,7 +139,6 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                     //int niveles_id = int.tryParse(NivelCtrl.text) ?? 0;
 
                     var respuesta = await Providers().estudiantesAgregar(
-                      codigoCtrl.text.trim(),
                       nombreCtrl.text.trim(),
                       apellidoCtrl.text.trim(),
                       edad,

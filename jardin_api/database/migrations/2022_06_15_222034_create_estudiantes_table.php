@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('estudiantes', function (Blueprint $table) {
 
-            // Se le puse id(); para quitar error en evento, tratar de cambiar mas adelante
-
             //$table->string('cod_estudiante')->primary();
-            $table->string('cod_estudiante')->primary();
+            $table->increments('id');
             $table->string('nombre');
             $table->string('apellido');
             $table->integer('edad');

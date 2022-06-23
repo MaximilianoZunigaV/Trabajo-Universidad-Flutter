@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('eventos', function (Blueprint $table) {
-            $table->string('estudiante_cod');
-            $table->foreign('estudiante_cod')->references('cod_estudiante')->on('estudiantes');
+            $table->UnsignedInteger('estudiantes_id');
+            $table->foreign('estudiantes_id')->references('id')->on('estudiantes');
         });
     }
 

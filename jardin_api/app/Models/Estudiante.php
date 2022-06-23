@@ -11,9 +11,9 @@ class Estudiante extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'estudiantes';
-    protected $primaryKey = 'cod_estudiante';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    // protected $primaryKey = 'cod_estudiante';
+    // public $incrementing = false;
+    // protected $keyType = 'string';
     public $timestamps = false;
 
 
