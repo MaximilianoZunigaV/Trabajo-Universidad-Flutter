@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jardin_flutter/pages/agregar_evento_page.dart';
+import 'package:jardin_flutter/pages/agregar/agregar_evento_page.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -58,7 +58,7 @@ class _EventosTabState extends State<EventosTab> {
                           ),
                           title: Text('Causa: ${event['nombre']}'),
                           subtitle: Text(
-                              'Codigo Estudiante: ${event['estudiante_cod']}'),
+                              'Codigo Estudiante: ${event['estudiantes_id']}'),
                           trailing: Text(event['fecha']),
                         ),
                       );

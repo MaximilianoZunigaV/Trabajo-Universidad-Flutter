@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
-
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AgregarEvento extends StatefulWidget {
   AgregarEvento({Key? key}) : super(key: key);
@@ -16,16 +16,22 @@ class AgregarEvento extends StatefulWidget {
 class _AgregarEventoState extends State<AgregarEvento> {
   final formKey = GlobalKey<FormState>();
 
-  TextEditingController nombreCtrl = TextEditingController();
   TextEditingController descripcionCtrl = TextEditingController();
-  TextEditingController fechaCtrl = TextEditingController();
 
-  String errNombre = '';
   String errDescripcion = '';
-  String errFecha = '';
+
+  DateTime fechaSeleccionada = DateTime.now();
+  var ffecha = DateFormat('dd-MM-yyyy');
+  //String afecha = ffecha.format(fechaSeleccionada);
+
+  static final DateTime now = DateTime.now();
+  static final DateFormat formatter = DateFormat('dd-MM-yyyy');
+  final String formatted = formatter.format(now);
+
+  //Obtener el valor de id (para dropdownValue)
 
   /////PARA DROPDOWNBUTTON/////
-  int dropdownAlumn = 1;
+  int alumnId = 1;
   String dropdownCausa = 'Retiro';
   List alumnList = List.empty();
   final String apiURL = 'http://10.0.2.2:8000/api';
@@ -39,6 +45,7 @@ class _AgregarEventoState extends State<AgregarEvento> {
       var jsonData = jsonDecode(respuesta.body);
       setState(() {
         alumnList = jsonData;
+        alumnId = alumnList[0]['id'];
       });
     } else {
       return [];
@@ -51,7 +58,6 @@ class _AgregarEventoState extends State<AgregarEvento> {
     super.initState();
     getAllEstudiantes();
   }
-  ////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +72,6 @@ class _AgregarEventoState extends State<AgregarEvento> {
           padding: EdgeInsets.all(8.0),
           child: ListView(
             children: [
-              //Container(),
               Text(''),
               Text('Causa de Evento',
                   style: TextStyle(fontSize: 16, color: Colors.black54)),
@@ -107,17 +112,28 @@ class _AgregarEventoState extends State<AgregarEvento> {
                   style: TextStyle(color: Colors.red),
                 ),
               ),
-              TextFormField(
-                controller: fechaCtrl,
-                decoration: InputDecoration(labelText: 'Fecha (YYYY-MM-DD)'),
+              Row(
+                children: [
+                  Text('Fecha Actual: ', style: TextStyle(fontSize: 16)),
+                  Text(ffecha.format(fechaSeleccionada),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Spacer(),
+                  TextButton(
+                      child: Icon(MdiIcons.calendar),
+                      onPressed: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime.now(),
+                        ).then((fecha) {
+                          fechaSeleccionada = fecha ?? fechaSeleccionada;
+                        });
+                      }),
+                ],
               ),
-              Container(
-                width: double.infinity,
-                child: Text(
-                  errFecha,
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
+              Text(''),
               Text(
                 'Estudiante',
                 style: TextStyle(fontSize: 16, color: Colors.black54),
@@ -125,12 +141,12 @@ class _AgregarEventoState extends State<AgregarEvento> {
               DropdownButton(
                   //Nuevo Widget :D //Agregar para que sea con base de datos
                   isExpanded: true,
-                  value: dropdownAlumn,
+                  value: alumnId,
                   hint: Text('Seleccione un estudiante'),
                   onChanged: (val) {
                     setState(() {
                       int newVal = int.tryParse(val.toString()) ?? 0;
-                      dropdownAlumn = newVal;
+                      alumnId = newVal;
                     });
                   },
                   items: alumnList.map((estudiantes) {
@@ -148,26 +164,16 @@ class _AgregarEventoState extends State<AgregarEvento> {
                     var respuesta = await Providers().eventoAgregar(
                       dropdownCausa,
                       descripcionCtrl.text.trim(),
-                      fechaCtrl.text.trim(),
-                      dropdownAlumn, //toma el valor de la id seleccionada (desde el DropDownButton),
+                      formatted,
+                      alumnId, //toma el valor de la id seleccionada (desde el DropDownButton),
                       //BigInt.from(nivel), //transformar a BigInt
                     );
 
                     if (respuesta['message'] != null) {
-                      //codigo
-                      if (respuesta['errors']['fecha'] != null) {
-                        errFecha = respuesta['errors']['fecha'][0];
-                      }
-
-                      //nombre
-                      if (respuesta['errors']['nombre'] != null) {
-                        errNombre = respuesta['errors']['nombre'][0];
-                      }
-
-                      //apeliido
-                      if (respuesta['errors']['descripcion'] != null) {
-                        errDescripcion = respuesta['errors']['descripcion'][0];
-                      }
+                      //descripcion
+                      // if (respuesta['errors']['descripcion'] != null) {
+                      //   errDescripcion = respuesta['errors']['descripcion'][0];
+                      // }
                       setState(() {});
                       return;
                     }

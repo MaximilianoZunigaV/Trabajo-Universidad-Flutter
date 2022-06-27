@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jardin_flutter/pages/agregar_estudiante_page.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import '../agregar/agregar_estudiante_page.dart';
 
 class EstudiantesTab extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class EstudiantesTab extends StatefulWidget {
 }
 
 class _EstudiantesTabState extends State<EstudiantesTab> {
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,37 +32,21 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
                     itemCount: snap.data.length,
                     itemBuilder: (context, index) {
                       var alumn = snap.data[index];
-                      return Dismissible(
-                        key: ObjectKey(alumn),
-                        direction: DismissDirection.endToStart,
-                        background: Container(
-                          padding: EdgeInsets.only(right: 10),
-                          alignment: Alignment.center,
-                          color: Colors.red,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Borrar',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Icon(
-                                MdiIcons.closeThick,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
+                      return ListTile(
+                        leading: Icon(
+                          MdiIcons.foodApple,
+                          color: Color.fromARGB(255, 143, 195, 80),
                         ),
-                        child: ListTile(
-                          leading: Icon(
-                            MdiIcons.foodApple,
-                            color: Color.fromARGB(255, 143, 195, 80),
-                          ),
-                          title:
-                              Text('${alumn['nombre']} ${alumn['apellido']}'),
-                          subtitle: Text('Id: ${alumn['id']}'),
-                          trailing: Text('Edad: ${alumn['edad']} años'),
-                        ),
+                        title: Text('${alumn['nombre']} ${alumn['apellido']}'),
+                        subtitle: Text('ID del Estudiante: ${alumn['id']}'),
+                        trailing: Text('Edad: ${alumn['edad']} años'),
+                        // tileColor:
+                        //     selectedIndex == index ? Colors.lightBlue : null,
+                        // onTap: () {
+                        //   setState(() {
+                        //     selectedIndex = index;
+                        //   });
+                        // },
                       );
                     },
                   );

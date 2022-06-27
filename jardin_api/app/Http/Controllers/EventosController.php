@@ -29,7 +29,7 @@ class EventosController extends Controller
         $evento->nombre = $request->nombre;
         $evento->descripcion = $request -> descripcion;
         $evento->fecha = $request -> fecha;
-        $evento -> estudiante_cod = $request-> estudiante_cod;
+        $evento -> estudiantes_id = $request-> estudiantes_id;
         $evento->save();
         return $evento;
     }
@@ -59,7 +59,7 @@ class EventosController extends Controller
         $evento->nombre = $request->nombre;
         $evento->descripcion = $request -> descripcion;
         $evento->fecha = $request -> fecha;
-        $evento -> estudiante_cod = $request-> estudiante_cod;
+        $evento -> estudiantes_id = $request-> estudiantes_id;
         $evento->save();
         return $evento;
     }

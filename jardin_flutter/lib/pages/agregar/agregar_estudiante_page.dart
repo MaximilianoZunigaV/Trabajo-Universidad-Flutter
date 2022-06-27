@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jardin_flutter/pages/tabs/niveles_tab.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 
 import 'dart:convert';
@@ -25,8 +24,7 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
   String errApellido = '';
 
   /////PARA DROPDOWNBUTTON/////
-  int dropdownValue =
-      1; //se debe cambiar este valor por el primer elemento de la lista de Niveles
+  int dropdownValue = 1;
   List nivelesList = List.empty();
   final String apiURL = 'http://10.0.2.2:8000/api';
 
@@ -39,6 +37,7 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
       var jsonData = jsonDecode(respuesta.body);
       setState(() {
         nivelesList = jsonData;
+        dropdownValue = nivelesList[0]['id'];
       });
     } else {
       return [];

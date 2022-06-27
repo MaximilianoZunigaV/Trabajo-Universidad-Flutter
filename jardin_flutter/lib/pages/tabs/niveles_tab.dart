@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jardin_flutter/pages/agregar_nivel_page.dart';
+import 'package:jardin_flutter/pages/agregar/agregar_nivel_page.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -56,7 +56,8 @@ class _NivelesTabState extends State<NivelesTab> {
                             MdiIcons.fruitPineapple,
                             color: Color.fromARGB(255, 143, 195, 80),
                           ),
-                          title: Text('${level['id']}  ${level['nombre']}'),
+                          title: Text(level['nombre']),
+                          subtitle: Text('ID del Nivel: ${level['id']}'),
                         ),
                       );
                     },

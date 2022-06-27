@@ -39,6 +39,18 @@ class Providers {
     return json.decode(respuesta.body);
   }
 
+  //datos de 1 Estudiante
+  Future<LinkedHashMap<String, dynamic>> getEstudiante(int idEstudiante) async {
+    var uri = Uri.parse('$apiURL/estudiantes/$idEstudiante');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return new LinkedHashMap();
+    }
+  }
+
   //borrar estudiantes
   Future<bool> estudiantesBorrar(String cod_estudiante) async {
     var uri = Uri.parse('$apiURL/estudiantes/$cod_estudiante');
@@ -75,6 +87,18 @@ class Providers {
     return json.decode(respuesta.body);
   }
 
+  //Obtener 1 nivel
+  Future<LinkedHashMap<int, dynamic>> getNivel(int id) async {
+    var uri = Uri.parse('$apiURL/niveles/$id');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return new LinkedHashMap();
+    }
+  }
+
 ////////////////////////EDUCADORAS////////////////////////
   ///
   //lista de educadoras
@@ -89,6 +113,19 @@ class Providers {
     }
   }
 
+  //retorna datos de 1 educadora
+  Future<LinkedHashMap<String, dynamic>> getEducadora(
+      String cod_educadora) async {
+    var uri = Uri.parse('$apiURL/educadoras/$cod_educadora');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return new LinkedHashMap();
+    }
+  }
+
   //agregar educadora
   Future<LinkedHashMap<String, dynamic>> educadoraAgregar(String cod_educadora,
       String nombre, String apellido, String email, int niveles_id) async {
@@ -100,6 +137,32 @@ class Providers {
         },
         body: jsonEncode(<String, dynamic>{
           'cod_educadora': cod_educadora,
+          'nombre': nombre,
+          'apellido': apellido,
+          'email': email,
+          'niveles_id': niveles_id,
+        }));
+
+    return json.decode(respuesta.body);
+  }
+
+  //Editar educadora
+  Future<LinkedHashMap<String, dynamic>> educadoraEditar(
+      String cod_educadora,
+      String cod_educadora_nuevo,
+      String nombre,
+      String apellido,
+      String email,
+      int niveles_id) async {
+    var uri = Uri.parse('$apiURL/educadoras/$cod_educadora');
+    var respuesta = await http.put(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'cod_educadora': cod_educadora,
+          'cod_educadora_nuevo': cod_educadora_nuevo,
           'nombre': nombre,
           'apellido': apellido,
           'email': email,
@@ -124,10 +187,8 @@ class Providers {
   }
 
   //agregar evento
-
-  //HAY QUE CAMBIAR String fecha a un DateTime
   Future<LinkedHashMap<String, dynamic>> eventoAgregar(String nombre,
-      String descripcion, String fecha, int estudiante_id) async {
+      String descripcion, String fecha, int estudiantes_id) async {
     var uri = Uri.parse('$apiURL/eventos');
     var respuesta = await http.post(uri,
         headers: <String, String>{
@@ -138,9 +199,8 @@ class Providers {
           'nombre': nombre,
           'descripcion': descripcion,
           'fecha': fecha,
-          'estudiante_cod': estudiante_id,
+          'estudiantes_id': estudiantes_id,
         }));
-
     return json.decode(respuesta.body);
   }
 }

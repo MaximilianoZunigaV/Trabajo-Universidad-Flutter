@@ -23,9 +23,12 @@ class _AgregarEducadoraState extends State<AgregarEducadora> {
   String errNombre = '';
   String errApellido = '';
 
+  String emailRegex =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+
   /////PARA DROPDOWNBUTTON/////
   int dropdownValue =
-      1; //se debe cambiar este valor por el primer elemento de la lista de Niveles
+      0; //se debe cambiar este valor por el primer elemento de la lista de Niveles
   List nivelesList = List.empty();
   final String apiURL = 'http://10.0.2.2:8000/api';
 
@@ -38,6 +41,7 @@ class _AgregarEducadoraState extends State<AgregarEducadora> {
       var jsonData = jsonDecode(respuesta.body);
       setState(() {
         nivelesList = jsonData;
+        dropdownValue = nivelesList[0]['id'];
       });
     } else {
       return [];
@@ -103,6 +107,15 @@ class _AgregarEducadoraState extends State<AgregarEducadora> {
                 controller: emailCtrl,
                 decoration: InputDecoration(labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
+                validator: (valor) {
+                  if (valor == null || valor.isEmpty) {
+                    return 'Indique su email';
+                  }
+                  if (!RegExp(emailRegex).hasMatch(valor)) {
+                    return 'Formato de email no válido';
+                  }
+                  return null;
+                },
               ),
               Text(''),
               Text(''),

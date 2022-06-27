@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jardin_flutter/pages/agregar_estudiante_page.dart';
 import 'package:jardin_flutter/pages/home_page.dart';
 
 void main() {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jardin_flutter/pages/agregar_educadora_page.dart';
+import 'package:jardin_flutter/pages/agregar/agregar_educadora_page.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -29,9 +29,9 @@ class _EducadorasTabState extends State<EducadorasTab> {
                     separatorBuilder: (_, __) => Divider(),
                     itemCount: snap.data.length,
                     itemBuilder: (context, index) {
-                      var alumn = snap.data[index];
+                      var edu = snap.data[index];
                       return Dismissible(
-                        key: ObjectKey(alumn),
+                        key: ObjectKey(edu),
                         direction: DismissDirection.endToStart,
                         background: Container(
                           padding: EdgeInsets.only(right: 10),
@@ -56,9 +56,8 @@ class _EducadorasTabState extends State<EducadorasTab> {
                             MdiIcons.bookshelf,
                             color: Color.fromARGB(255, 143, 195, 80),
                           ),
-                          title:
-                              Text('${alumn['nombre']} ${alumn['apellido']}'),
-                          subtitle: Text('Codigo: ${alumn['cod_educadora']}'),
+                          title: Text('${edu['nombre']} ${edu['apellido']}'),
+                          subtitle: Text('Codigo: ${edu['cod_educadora']}'),
                         ),
                       );
                     },
@@ -89,6 +88,38 @@ class _EducadorasTabState extends State<EducadorasTab> {
           ],
         ),
       ),
+    );
+  }
+
+  void showSnackbar(String mensaje) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(mensaje),
+      ),
+    );
+  }
+
+  Future<dynamic> confirmDialog(BuildContext context, String producto) {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Confirmar borrado'),
+          content: Text('¿Borrar el producto $producto?'),
+          actions: [
+            TextButton(
+              child: Text('CANCELAR'),
+              onPressed: () => Navigator.pop(context, false),
+            ),
+            ElevatedButton(
+              child: Text('ACEPTAR'),
+              onPressed: () => Navigator.pop(context, true),
+            ),
+          ],
+        );
+      },
     );
   }
 }
