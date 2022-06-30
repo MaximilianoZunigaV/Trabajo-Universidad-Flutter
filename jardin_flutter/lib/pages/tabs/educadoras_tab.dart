@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:jardin_flutter/pages/agregar/agregar_educadora_page.dart';
+import 'package:jardin_flutter/pages/editar/editar_educadora_page.dart';
+import 'package:jardin_flutter/pages/info/educadora_info.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -9,6 +12,7 @@ class EducadorasTab extends StatefulWidget {
 }
 
 class _EducadorasTabState extends State<EducadorasTab> {
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,34 +34,63 @@ class _EducadorasTabState extends State<EducadorasTab> {
                     itemCount: snap.data.length,
                     itemBuilder: (context, index) {
                       var edu = snap.data[index];
-                      return Dismissible(
-                        key: ObjectKey(edu),
-                        direction: DismissDirection.endToStart,
-                        background: Container(
-                          padding: EdgeInsets.only(right: 10),
-                          alignment: Alignment.center,
-                          color: Colors.red,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Borrar',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Icon(
-                                MdiIcons.closeThick,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        ),
+                      return Slidable(
                         child: ListTile(
                           leading: Icon(
                             MdiIcons.bookshelf,
                             color: Color.fromARGB(255, 143, 195, 80),
                           ),
                           title: Text('${edu['nombre']} ${edu['apellido']}'),
-                          subtitle: Text('Codigo: ${edu['cod_educadora']}'),
+                          subtitle: Text('ID: ${edu['id']}'),
+                          onLongPress: () {
+                            MaterialPageRoute route = MaterialPageRoute(
+                              builder: (context) =>
+                                  EducadoraEditarPage(edu['id']),
+                            );
+                            Navigator.push(context, route);
+                          },
+                          onTap: () {
+                            MaterialPageRoute route = MaterialPageRoute(
+                              builder: (context) =>
+                                  EducadoraInfoPage(edu['id']),
+                            );
+                            Navigator.push(context, route);
+                          },
+                        ),
+                        endActionPane: ActionPane(
+                          motion: ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {
+                                String codEducadora = edu['id'].toString();
+                                String nombre = edu['nombre'];
+
+                                confirmDialog(context, nombre).then((confirma) {
+                                  if (confirma) {
+                                    //borrar
+                                    Providers()
+                                        .educadoraBorrar(codEducadora)
+                                        .then((borradoOk) {
+                                      if (borradoOk) {
+                                        //pudo borrar
+                                        snap.data.removeAt(index);
+                                        setState(() {});
+                                        showSnackbar(
+                                            'Educadora $nombre borrada');
+                                      } else {
+                                        //no pudo borrar
+                                        showSnackbar(
+                                            'No se pudo borrar la educadora');
+                                      }
+                                    });
+                                  }
+                                });
+                              },
+                              backgroundColor: Colors.red,
+                              icon: MdiIcons.trashCan,
+                              label: 'Borrar',
+                            ),
+                          ],
                         ),
                       );
                     },
@@ -70,8 +103,9 @@ class _EducadorasTabState extends State<EducadorasTab> {
             Container(
               //width: double.infinity,
               child: FloatingActionButton(
+                isExtended: false,
                 child: Icon(MdiIcons.plusThick),
-                elevation: 50.0,
+                elevation: 100.0,
                 backgroundColor: Color.fromARGB(255, 242, 76, 5),
                 onPressed: () {
                   MaterialPageRoute route =
@@ -100,14 +134,14 @@ class _EducadorasTabState extends State<EducadorasTab> {
     );
   }
 
-  Future<dynamic> confirmDialog(BuildContext context, String producto) {
+  Future<dynamic> confirmDialog(BuildContext context, String educadora) {
     return showDialog(
       barrierDismissible: false,
       context: context,
       builder: (context) {
         return AlertDialog(
           title: Text('Confirmar borrado'),
-          content: Text('¿Borrar el producto $producto?'),
+          content: Text('¿Borrar la educadora $educadora?'),
           actions: [
             TextButton(
               child: Text('CANCELAR'),

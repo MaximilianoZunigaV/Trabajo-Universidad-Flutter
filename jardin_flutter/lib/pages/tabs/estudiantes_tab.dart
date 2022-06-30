@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:jardin_flutter/pages/editar/editar_estudiante_page.dart';
+import 'package:jardin_flutter/pages/info/estudiantes_info.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -32,21 +35,66 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
                     itemCount: snap.data.length,
                     itemBuilder: (context, index) {
                       var alumn = snap.data[index];
-                      return ListTile(
-                        leading: Icon(
-                          MdiIcons.foodApple,
-                          color: Color.fromARGB(255, 143, 195, 80),
+                      return Slidable(
+                        child: ListTile(
+                          leading: Icon(
+                            MdiIcons.foodApple,
+                            color: Color.fromARGB(255, 143, 195, 80),
+                          ),
+                          title:
+                              Text('${alumn['nombre']} ${alumn['apellido']}'),
+                          subtitle: Text('ID del Estudiante: ${alumn['id']}'),
+                          trailing: Text('Edad: ${alumn['edad']} años'),
+                          onLongPress: () {
+                            MaterialPageRoute route = MaterialPageRoute(
+                              builder: (context) =>
+                                  EstudianteEditarPage(alumn['id']),
+                            );
+                            Navigator.push(context, route);
+                          },
+                          onTap: () {
+                            MaterialPageRoute route = MaterialPageRoute(
+                              builder: (context) =>
+                                  EstudianteInfoPage(alumn['id']),
+                            );
+                            Navigator.push(context, route);
+                          },
                         ),
-                        title: Text('${alumn['nombre']} ${alumn['apellido']}'),
-                        subtitle: Text('ID del Estudiante: ${alumn['id']}'),
-                        trailing: Text('Edad: ${alumn['edad']} años'),
-                        // tileColor:
-                        //     selectedIndex == index ? Colors.lightBlue : null,
-                        // onTap: () {
-                        //   setState(() {
-                        //     selectedIndex = index;
-                        //   });
-                        // },
+                        endActionPane: ActionPane(
+                          motion: ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {
+                                String alumnid = alumn['id'].toString();
+                                String nombre = alumn['nombre'];
+
+                                confirmDialog(context, nombre).then((confirma) {
+                                  if (confirma) {
+                                    //borrar
+                                    Providers()
+                                        .estudianteBorrar(alumnid)
+                                        .then((borradoOk) {
+                                      if (borradoOk) {
+                                        //pudo borrar
+                                        snap.data.removeAt(index);
+                                        setState(() {});
+                                        showSnackbar(
+                                            'Estudiante $nombre borrado');
+                                      } else {
+                                        //no pudo borrar
+                                        showSnackbar(
+                                            'No se pudo borrar el estudiante');
+                                      }
+                                    });
+                                  }
+                                });
+                              },
+                              backgroundColor: Colors.red,
+                              icon: MdiIcons.trashCan,
+                              label: 'Borrar',
+                            ),
+                          ],
+                        ),
                       );
                     },
                   );
@@ -77,6 +125,38 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
           ],
         ),
       ),
+    );
+  }
+
+  void showSnackbar(String mensaje) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(mensaje),
+      ),
+    );
+  }
+
+  Future<dynamic> confirmDialog(BuildContext context, String alumno) {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Confirmar borrado'),
+          content: Text('¿Borrar el estudiante $alumno?'),
+          actions: [
+            TextButton(
+              child: Text('CANCELAR'),
+              onPressed: () => Navigator.pop(context, false),
+            ),
+            ElevatedButton(
+              child: Text('ACEPTAR'),
+              onPressed: () => Navigator.pop(context, true),
+            ),
+          ],
+        );
+      },
     );
   }
 }

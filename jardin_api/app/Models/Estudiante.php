@@ -22,10 +22,10 @@ class Estudiante extends Model
         //Haciendo referencia al modelo Nivel
     }
 
-    //referencia a estudiante para traer el array de todos los estudiantes que pertenecen al Evento //revisarlo  
-    public function estudiantes(){
-        return $this->hasMany(Estudiante::class);
+    public function eventos(){
+        return $this->hasMany(evento::class);
     }
+
 
 
 }

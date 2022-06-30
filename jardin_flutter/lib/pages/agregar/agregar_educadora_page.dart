@@ -14,14 +14,13 @@ class AgregarEducadora extends StatefulWidget {
 class _AgregarEducadoraState extends State<AgregarEducadora> {
   final formKey = GlobalKey<FormState>();
 
-  TextEditingController codigoCtrl = TextEditingController();
   TextEditingController nombreCtrl = TextEditingController();
   TextEditingController apellidoCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
 
-  String errCodigo = '';
   String errNombre = '';
   String errApellido = '';
+  String errEmail = '';
 
   String emailRegex =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
@@ -69,18 +68,6 @@ class _AgregarEducadoraState extends State<AgregarEducadora> {
           padding: EdgeInsets.all(8.0),
           child: ListView(
             children: [
-              Container(),
-              TextFormField(
-                controller: codigoCtrl,
-                decoration: InputDecoration(labelText: 'Codigo'),
-              ),
-              Container(
-                width: double.infinity,
-                child: Text(
-                  errCodigo,
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
               TextFormField(
                 controller: nombreCtrl,
                 decoration: InputDecoration(labelText: 'Nombre'),
@@ -107,15 +94,22 @@ class _AgregarEducadoraState extends State<AgregarEducadora> {
                 controller: emailCtrl,
                 decoration: InputDecoration(labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
-                validator: (valor) {
-                  if (valor == null || valor.isEmpty) {
-                    return 'Indique su email';
-                  }
-                  if (!RegExp(emailRegex).hasMatch(valor)) {
-                    return 'Formato de email no válido';
-                  }
-                  return null;
-                },
+                // validator: (valor) {
+                //   if (valor == null || valor.isEmpty) {
+                //     return 'Indique su email';
+                //   }
+                //   if (!RegExp(emailRegex).hasMatch(valor)) {
+                //     return 'Formato de email no válido';
+                //   }
+                //   return null;
+                // },
+              ),
+              Container(
+                width: double.infinity,
+                child: Text(
+                  errEmail,
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
               Text(''),
               Text(''),
@@ -148,29 +142,26 @@ class _AgregarEducadoraState extends State<AgregarEducadora> {
                   child: Text('Agregar Educadora'),
                   onPressed: () async {
                     var respuesta = await Providers().educadoraAgregar(
-                      codigoCtrl.text.trim(),
                       nombreCtrl.text.trim(),
                       apellidoCtrl.text.trim(),
                       emailCtrl.text.trim(),
                       dropdownValue,
-                      //BigInt.from(nivel), //transformar a BigInt
                     );
 
                     if (respuesta['message'] != null) {
-                      //codigo
-                      if (respuesta['errors']['cod_educadora'] != null) {
-                        errCodigo = respuesta['errors']['cod_educadora'][0];
-                      }
-
                       //nombre
                       if (respuesta['errors']['nombre'] != null) {
                         errNombre = respuesta['errors']['nombre'][0];
                       }
-
-                      //apeliido
+                      //apellido
                       if (respuesta['errors']['apellido'] != null) {
                         errApellido = respuesta['errors']['apellido'][0];
                       }
+                      // //email
+                      // if (respuesta['errors']['nombre'] != null) {
+                      //   errNombre = respuesta['errors']['nombre'][0];
+                      // }
+
                       setState(() {});
                       return;
                     }

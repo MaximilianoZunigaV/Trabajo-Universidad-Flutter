@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:jardin_flutter/pages/agregar/agregar_evento_page.dart';
+import 'package:jardin_flutter/pages/editar/editar_evento_page.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -30,27 +32,7 @@ class _EventosTabState extends State<EventosTab> {
                     itemCount: snap.data.length,
                     itemBuilder: (context, index) {
                       var event = snap.data[index];
-                      return Dismissible(
-                        key: ObjectKey(event),
-                        direction: DismissDirection.endToStart,
-                        background: Container(
-                          padding: EdgeInsets.only(right: 10),
-                          alignment: Alignment.center,
-                          color: Colors.red,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Borrar',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Icon(
-                                MdiIcons.closeThick,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        ),
+                      return Slidable(
                         child: ListTile(
                           leading: Icon(
                             MdiIcons.foodApple,
@@ -60,6 +42,59 @@ class _EventosTabState extends State<EventosTab> {
                           subtitle: Text(
                               'Codigo Estudiante: ${event['estudiantes_id']}'),
                           trailing: Text(event['fecha']),
+                        ),
+                        startActionPane: ActionPane(
+                          motion: ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {
+                                MaterialPageRoute route = MaterialPageRoute(
+                                  builder: (context) =>
+                                      EventoEditarPage(event['id']),
+                                );
+                                Navigator.push(context, route).then((value) {
+                                  setState(() {});
+                                });
+                              },
+                              backgroundColor: Colors.purple,
+                              icon: MdiIcons.pen,
+                              label: 'Editar',
+                            ),
+                          ],
+                        ),
+                        endActionPane: ActionPane(
+                          motion: ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {
+                                String alumnid = event['id'].toString();
+                                String nombre = event['nombre'];
+
+                                confirmDialog(context, nombre).then((confirma) {
+                                  if (confirma) {
+                                    //borrar
+                                    Providers()
+                                        .eventoBorrar(alumnid)
+                                        .then((borradoOk) {
+                                      if (borradoOk) {
+                                        //pudo borrar
+                                        snap.data.removeAt(index);
+                                        setState(() {});
+                                        showSnackbar('Evento $nombre borrado');
+                                      } else {
+                                        //no pudo borrar
+                                        showSnackbar(
+                                            'No se pudo borrar el evento');
+                                      }
+                                    });
+                                  }
+                                });
+                              },
+                              backgroundColor: Colors.red,
+                              icon: MdiIcons.trashCan,
+                              label: 'Borrar',
+                            ),
+                          ],
                         ),
                       );
                     },
@@ -74,7 +109,7 @@ class _EventosTabState extends State<EventosTab> {
               child: FloatingActionButton(
                 isExtended: false,
                 child: Icon(MdiIcons.plusThick),
-                elevation: 50.0,
+                elevation: 100.0,
                 backgroundColor: Color.fromARGB(255, 242, 76, 5),
                 onPressed: () {
                   MaterialPageRoute route =
@@ -91,6 +126,38 @@ class _EventosTabState extends State<EventosTab> {
           ],
         ),
       ),
+    );
+  }
+
+  void showSnackbar(String mensaje) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(mensaje),
+      ),
+    );
+  }
+
+  Future<dynamic> confirmDialog(BuildContext context, String evento) {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Confirmar borrado'),
+          content: Text('¿Borrar el evento $evento?'),
+          actions: [
+            TextButton(
+              child: Text('CANCELAR'),
+              onPressed: () => Navigator.pop(context, false),
+            ),
+            ElevatedButton(
+              child: Text('ACEPTAR'),
+              onPressed: () => Navigator.pop(context, true),
+            ),
+          ],
+        );
+      },
     );
   }
 }

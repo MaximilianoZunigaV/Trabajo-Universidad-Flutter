@@ -12,17 +12,74 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  TabController? tabController;
+  int index = 0;
+  String image =
+      'https://img.freepik.com/vector-gratis/estudiantes-elementos-sala-jardin-infantes-blanco_1308-55756.jpg?w=2000';
+
+  List<String> miImages = [
+    'https://img.freepik.com/vector-gratis/estudiantes-elementos-sala-jardin-infantes-blanco_1308-55756.jpg?w=2000',
+    'https://img.freepik.com/vector-gratis/ninos-maestra-jardin-infantes-patio-recreo-jugando-estudiando-ninos-escuchando-al-educador_316839-1359.jpg?w=2000',
+    'https://i.pinimg.com/736x/94/43/b8/9443b8fc18a439388a9ecb715878453c.jpg',
+    'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F285758349%2F502749266395%2F1%2Foriginal.20220516-210722?w=512&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C231%2C626%2C313&s=d62320335936634a9afc2b1c872d3d31'
+  ];
+
+  void _tabListener() {
+    setState(() {
+      index = tabController!.index;
+      image = miImages[index];
+    });
+  }
+
+  @override
+  void initState() {
+    tabController = TabController(length: 4, vsync: this);
+    tabController!.addListener((_tabListener));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabController!.removeListener(_tabListener);
+    tabController!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            bottom: TabBar(
-              //isScrollable: false,
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          elevation: 0.0,
+          pinned: true,
+          backgroundColor: Color.fromARGB(255, 242, 76, 5),
+          expandedHeight: 400.0,
+          flexibleSpace: FlexibleSpaceBar(
+            title: Text('Jardin Semillita',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 143, 195, 80),
+                  fontSize: 20,
+                )),
+            background: Image.network(image, fit: BoxFit.cover),
+          ),
+          leading: Icon(
+            MdiIcons.seed,
+            color: Color.fromARGB(255, 143, 195, 80),
+          ),
+        ),
+        SliverAppBar(
+          pinned: true,
+          primary: false,
+          elevation: 8.0,
+          backgroundColor: Color.fromARGB(255, 242, 76, 5),
+          title: Align(
+            alignment: AlignmentDirectional.center,
+            child: TabBar(
+              controller: tabController,
+              isScrollable: true,
+              indicatorColor: Colors.red,
               tabs: [
                 Tab(
                   text: 'Niños',
@@ -42,28 +99,22 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            title: Text(
-              'Jardin Semillita',
-              style: TextStyle(
-                color: Color.fromARGB(255, 143, 195, 80),
-              ),
-            ),
-            backgroundColor: Color.fromARGB(255, 242, 76, 5),
-            leading: Icon(
-              MdiIcons.seed,
-              color: Color.fromARGB(255, 143, 195, 80),
-            ),
           ),
-          body: TabBarView(
-            children: [
+        ),
+        SliverToBoxAdapter(
+            child: SizedBox(
+          height: 700.0,
+          child: Padding(
+            padding: EdgeInsets.all(0.0),
+            child: TabBarView(controller: tabController, children: [
               EstudiantesTab(),
               EducadorasTab(),
               EventosTab(),
               NivelesTab(),
-            ],
+            ]),
           ),
-        ),
-      ),
+        ))
+      ],
     );
   }
 }

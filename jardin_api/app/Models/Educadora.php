@@ -12,9 +12,6 @@ class Educadora extends Model
     use HasFactory, SoftDeletes;
     
     protected $table = 'educadoras';
-    protected $primaryKey = 'cod_educadora';
-    public $incrementing = false;
-    protected $keyType = 'string';
     public $timestamps = false;
 
     public function nivel(){

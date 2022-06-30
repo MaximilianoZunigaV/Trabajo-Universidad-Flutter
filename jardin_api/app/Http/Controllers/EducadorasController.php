@@ -26,7 +26,6 @@ class EducadorasController extends Controller
     public function store(Request $request)
     {
         $educadora = new Educadora();
-        $educadora -> cod_educadora = $request->cod_educadora;
         $educadora -> nombre = $request -> nombre;
         $educadora -> apellido = $request->apellido;
         $educadora -> email = $request-> email;
@@ -67,7 +66,6 @@ class EducadorasController extends Controller
      */
     public function update(Request $request, Educadora $educadora)
     {
-        $educadora -> cod_educadora = $request->cod_educadora;
         $educadora -> nombre = $request -> nombre;
         $educadora -> apellido = $request->apellido;
         $educadora -> email = $request-> email;
@@ -83,8 +81,8 @@ class EducadorasController extends Controller
      * @param  \App\Models\Educadora  $educadora
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Educadora $educadora)
+    public function destroy($educadora)
     {
-        $educadora ->delete();
+        Estudiante::where('id', $estudiante) -> delete();
     }
 }

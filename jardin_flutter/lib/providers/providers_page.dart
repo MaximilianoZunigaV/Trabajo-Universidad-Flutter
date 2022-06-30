@@ -51,8 +51,29 @@ class Providers {
     }
   }
 
+  //editar estudiante
+  Future<LinkedHashMap<String, dynamic>> estudianteEditar(int id, int nuevo_id,
+      String nombre, String apellido, int edad, int niveles_id) async {
+    var uri = Uri.parse('$apiURL/estudiantes/$id');
+    var respuesta = await http.put(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': id,
+          'nuevo_id': nuevo_id,
+          'nombre': nombre,
+          'apellido': apellido,
+          'edad': edad,
+          'niveles_id': niveles_id,
+        }));
+
+    return json.decode(respuesta.body);
+  }
+
   //borrar estudiantes
-  Future<bool> estudiantesBorrar(String cod_estudiante) async {
+  Future<bool> estudianteBorrar(String cod_estudiante) async {
     var uri = Uri.parse('$apiURL/estudiantes/$cod_estudiante');
     var respuesta = await http.delete(uri);
     return respuesta.statusCode == 200;
@@ -88,7 +109,7 @@ class Providers {
   }
 
   //Obtener 1 nivel
-  Future<LinkedHashMap<int, dynamic>> getNivel(int id) async {
+  Future<LinkedHashMap<dynamic, dynamic>> getNivel(int id) async {
     var uri = Uri.parse('$apiURL/niveles/$id');
     var respuesta = await http.get(uri);
 
@@ -97,6 +118,31 @@ class Providers {
     } else {
       return new LinkedHashMap();
     }
+  }
+
+  //editar nivel
+  Future<LinkedHashMap<String, dynamic>> nivelEditar(
+      int id, int nuevo_id, String nombre) async {
+    var uri = Uri.parse('$apiURL/niveles/$id');
+    var respuesta = await http.put(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': id,
+          'nuevo_id': nuevo_id,
+          'nombre': nombre,
+        }));
+
+    return json.decode(respuesta.body);
+  }
+
+  //borrar nivel
+  Future<bool> nivelBorrar(String id_nivel) async {
+    var uri = Uri.parse('$apiURL/niveles/$id_nivel');
+    var respuesta = await http.delete(uri);
+    return respuesta.statusCode == 200;
   }
 
 ////////////////////////EDUCADORAS////////////////////////
@@ -113,10 +159,28 @@ class Providers {
     }
   }
 
+  //agregar educadora
+  Future<LinkedHashMap<String, dynamic>> educadoraAgregar(
+      String nombre, String apellido, String email, int niveles_id) async {
+    var uri = Uri.parse('$apiURL/educadoras');
+    var respuesta = await http.post(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'nombre': nombre,
+          'apellido': apellido,
+          'email': email,
+          'niveles_id': niveles_id,
+        }));
+
+    return json.decode(respuesta.body);
+  }
+
   //retorna datos de 1 educadora
-  Future<LinkedHashMap<String, dynamic>> getEducadora(
-      String cod_educadora) async {
-    var uri = Uri.parse('$apiURL/educadoras/$cod_educadora');
+  Future<LinkedHashMap<String, dynamic>> getEducadora(int id) async {
+    var uri = Uri.parse('$apiURL/educadoras/$id');
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {
@@ -126,17 +190,16 @@ class Providers {
     }
   }
 
-  //agregar educadora
-  Future<LinkedHashMap<String, dynamic>> educadoraAgregar(String cod_educadora,
-      String nombre, String apellido, String email, int niveles_id) async {
-    var uri = Uri.parse('$apiURL/educadoras');
-    var respuesta = await http.post(uri,
+  //editar educadora
+  Future<LinkedHashMap<String, dynamic>> educadoraEditar(int id, String nombre,
+      String apellido, String email, int niveles_id) async {
+    var uri = Uri.parse('$apiURL/educadoras/$id');
+    var respuesta = await http.put(uri,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json'
         },
         body: jsonEncode(<String, dynamic>{
-          'cod_educadora': cod_educadora,
           'nombre': nombre,
           'apellido': apellido,
           'email': email,
@@ -146,30 +209,11 @@ class Providers {
     return json.decode(respuesta.body);
   }
 
-  //Editar educadora
-  Future<LinkedHashMap<String, dynamic>> educadoraEditar(
-      String cod_educadora,
-      String cod_educadora_nuevo,
-      String nombre,
-      String apellido,
-      String email,
-      int niveles_id) async {
+  //borrar educadora
+  Future<bool> educadoraBorrar(String cod_educadora) async {
     var uri = Uri.parse('$apiURL/educadoras/$cod_educadora');
-    var respuesta = await http.put(uri,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'cod_educadora': cod_educadora,
-          'cod_educadora_nuevo': cod_educadora_nuevo,
-          'nombre': nombre,
-          'apellido': apellido,
-          'email': email,
-          'niveles_id': niveles_id,
-        }));
-
-    return json.decode(respuesta.body);
+    var respuesta = await http.delete(uri);
+    return respuesta.statusCode == 200;
   }
 
 ////////////////////////EVENTOS///////////////////////////
@@ -202,5 +246,43 @@ class Providers {
           'estudiantes_id': estudiantes_id,
         }));
     return json.decode(respuesta.body);
+  }
+
+  //retorna datos de 1 evento
+  Future<List<Map<String, dynamic>>> getEvento(int id) async {
+    var uri = Uri.parse('$apiURL/eventos/$id');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return List.empty();
+    }
+  }
+
+  //editar evento
+  Future<LinkedHashMap<String, dynamic>> eventoEditar(int id, String nombre,
+      String descripcion, String fecha, int estudiantes_id) async {
+    var uri = Uri.parse('$apiURL/eventos/$id');
+    var respuesta = await http.put(uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'nombre': nombre,
+          'descripcion': descripcion,
+          'fecha': fecha,
+          'niveles_id': estudiantes_id,
+        }));
+
+    return json.decode(respuesta.body);
+  }
+
+  //evento borrar
+  Future<bool> eventoBorrar(String cod_evento) async {
+    var uri = Uri.parse('$apiURL/eventos/$cod_evento');
+    var respuesta = await http.delete(uri);
+    return respuesta.statusCode == 200;
   }
 }

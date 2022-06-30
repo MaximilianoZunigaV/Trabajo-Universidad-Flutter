@@ -20,14 +20,6 @@ class Evento extends Model
     // public $incrementing = true;
     // protected $keyType = 'integer';
     public $timestamps = false;
-
-    public function eventos(){
-        return $this->hasMany(Evento::class);
-    }
-
-    public function estudiantes(){
-        return $this->hasMany(Estudiante::class);
-    }
     
     public function estudiante(){
         return $this->belongsTo(Estudiante::class);

@@ -93,22 +93,12 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                 decoration: InputDecoration(labelText: 'Edad'),
                 keyboardType: TextInputType.number,
               ),
-              // TextFormField(
-              //   controller: NivelCtrl,
-              //   decoration: InputDecoration(
-              //       labelText: 'Nivel',
-              //       hintText: 'Solo numeros del 1 al 3',
-              //       helperText:
-              //           '(1)Medio Menor   (2)Medio Mayor   (3)Playground'),
-              //   keyboardType: TextInputType.number,
-              // ),
               Text(''),
               Text(''),
               Text(
                 'Nivel',
                 style: TextStyle(fontSize: 16, color: Colors.black54),
               ),
-
               DropdownButton(
                   //Nuevo Widget :D //Agregar para que sea con base de datos
                   isExpanded: true,
@@ -128,7 +118,6 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                           niveles['nombre']), //muesta en pantalla el nombre
                     );
                   }).toList()),
-
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -146,11 +135,6 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                     );
 
                     if (respuesta['message'] != null) {
-                      //codigo
-                      if (respuesta['errors']['cod_estudiante'] != null) {
-                        errCodigo = respuesta['errors']['cod_estudiante'][0];
-                      }
-
                       //nombre
                       if (respuesta['errors']['nombre'] != null) {
                         errNombre = respuesta['errors']['nombre'][0];

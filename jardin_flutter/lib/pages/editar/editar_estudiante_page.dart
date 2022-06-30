@@ -4,19 +4,23 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-class EducadoraEditarPage extends StatefulWidget {
-  int idEducadora;
-  EducadoraEditarPage(this.idEducadora, {Key? key}) : super(key: key);
+class EstudianteEditarPage extends StatefulWidget {
+  int idAlumn;
+  EstudianteEditarPage(this.idAlumn, {Key? key}) : super(key: key);
 
   @override
-  State<EducadoraEditarPage> createState() => _EducadoraEditarPageState();
+  State<EstudianteEditarPage> createState() => _EstudianteEditarPageState();
 }
 
-class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
+class _EstudianteEditarPageState extends State<EstudianteEditarPage> {
   TextEditingController idCtrl = TextEditingController();
   TextEditingController nombreCtrl = TextEditingController();
   TextEditingController apellidoCtrl = TextEditingController();
-  TextEditingController emailCtrl = TextEditingController();
+  TextEditingController edadCtrl = TextEditingController();
+
+  String errNombre = '';
+  String errApellido = '';
+  String errEdad = '';
 
   final formKey = GlobalKey<FormState>();
 
@@ -54,10 +58,13 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
-        title: Text('Editar Educadora'),
+        title: Text(
+          'Editar Estudiante',
+          style: TextStyle(color: Color.fromARGB(255, 143, 195, 80)),
+        ),
       ),
       body: FutureBuilder(
-        future: Providers().getEducadora(widget.idEducadora),
+        future: Providers().getEstudiante(widget.idAlumn),
         builder: (context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -68,7 +75,7 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
           idCtrl.text = data['id'].toString();
           nombreCtrl.text = data['nombre'];
           apellidoCtrl.text = data['apellido'];
-          emailCtrl.text = data['email'];
+          edadCtrl.text = data['edad'].toString();
 
           return Form(
             key: formKey,
@@ -79,15 +86,23 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
                   TextFormField(
                     controller: nombreCtrl,
                     decoration: InputDecoration(labelText: 'Nombre'),
+                    validator: (valor) {
+                      if (valor == null || valor.isEmpty) {
+                        return 'Este campo no puede quedar vacio';
+                      }
+                      return null;
+                    },
                   ),
                   TextFormField(
                     controller: apellidoCtrl,
                     decoration: InputDecoration(labelText: 'Apellido'),
                   ),
+                  Container(),
                   TextFormField(
-                    controller: emailCtrl,
-                    decoration: InputDecoration(labelText: 'Email'),
+                    controller: edadCtrl,
+                    decoration: InputDecoration(labelText: 'Edad'),
                   ),
+                  Container(),
                   Text(''),
                   Text(
                     'Nivel',
@@ -117,13 +132,14 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
                     child: ElevatedButton(
                       child: Text('Editar'),
                       onPressed: () {
-                        Providers().educadoraEditar(
-                          widget.idEducadora,
-                          nombreCtrl.text.trim(),
-                          apellidoCtrl.text.trim(),
-                          emailCtrl.text.trim(),
-                          dropdownValue,
-                        );
+                        Providers().estudianteEditar(
+                            widget.idAlumn,
+                            int.tryParse(idCtrl.text.trim()) ?? 0,
+                            nombreCtrl.text.trim(),
+                            apellidoCtrl.text.trim(),
+                            int.tryParse(edadCtrl.text.trim()) ?? 0,
+                            dropdownValue);
+
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(

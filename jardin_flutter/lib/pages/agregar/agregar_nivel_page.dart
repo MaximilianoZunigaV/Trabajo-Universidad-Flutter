@@ -49,14 +49,14 @@ class _AgregarNivelState extends State<AgregarNivel> {
                       nombreCtrl.text.trim(),
                     );
 
-                    if (respuesta['message'] != null) {
-                      //nombre
-                      if (respuesta['errors']['nombre'] != null) {
-                        errNombre = respuesta['errors']['nombre'][0];
-                      }
-                      setState(() {});
-                      return;
-                    }
+                    // if (respuesta['message'] != null) {
+                    //   //nombre
+                    //   if (respuesta['errors']['nombre'] != null) {
+                    //     errNombre = respuesta['errors']['nombre'][0];
+                    //   }
+                    setState(() {});
+                    //   return;
+                    // }
 
                     Navigator.pop(context);
                   }, //Fuera de onPressed
