@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
 use Illuminate\Http\Request;
+use App\Http\Requests\EstudiantesRequest;
 
 class EstudiantesController extends Controller
 {
@@ -23,7 +24,7 @@ class EstudiantesController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function store(Request $request)
+    public function store(EstudiantesRequest $request)
     {
         $estudiante = new Estudiante();
         $estudiante -> nombre = $request -> nombre;
@@ -53,7 +54,7 @@ class EstudiantesController extends Controller
      * @return \Illuminate\Http\Response
      */
   
-    public function update(Request $request, Estudiante $estudiante)
+    public function update(EstudiantesRequest $request, Estudiante $estudiante)
     {   
         $estudiante -> nombre = $request -> nombre;
         $estudiante -> apellido = $request->apellido;

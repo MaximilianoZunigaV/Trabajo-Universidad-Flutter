@@ -72,10 +72,9 @@ class _EstudianteEditarPageState extends State<EstudianteEditarPage> {
             );
           }
           var data = snapshot.data;
-          idCtrl.text = data['id'].toString();
-          nombreCtrl.text = data['nombre'];
-          apellidoCtrl.text = data['apellido'];
-          edadCtrl.text = data['edad'].toString();
+          String nombreText = data['nombre'];
+          String apellidoText = data['apellido'];
+          String edadText = data['edad'].toString();
 
           return Form(
             key: formKey,
@@ -85,24 +84,40 @@ class _EstudianteEditarPageState extends State<EstudianteEditarPage> {
                 children: [
                   TextFormField(
                     controller: nombreCtrl,
-                    decoration: InputDecoration(labelText: 'Nombre'),
-                    validator: (valor) {
-                      if (valor == null || valor.isEmpty) {
-                        return 'Este campo no puede quedar vacio';
-                      }
-                      return null;
-                    },
+                    decoration: InputDecoration(
+                        labelText: 'Nombre', hintText: nombreText),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      errNombre,
+                      style: TextStyle(color: Colors.red),
+                    ),
                   ),
                   TextFormField(
                     controller: apellidoCtrl,
-                    decoration: InputDecoration(labelText: 'Apellido'),
+                    decoration: InputDecoration(
+                        labelText: 'Apellido', hintText: apellidoText),
                   ),
-                  Container(),
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      errApellido,
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
                   TextFormField(
                     controller: edadCtrl,
-                    decoration: InputDecoration(labelText: 'Edad'),
+                    decoration:
+                        InputDecoration(labelText: 'Edad', hintText: edadText),
                   ),
-                  Container(),
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      errEdad,
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
                   Text(''),
                   Text(
                     'Nivel',
@@ -131,14 +146,30 @@ class _EstudianteEditarPageState extends State<EstudianteEditarPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       child: Text('Editar'),
-                      onPressed: () {
-                        Providers().estudianteEditar(
+                      onPressed: () async {
+                        var respuesta = await Providers().estudianteEditar(
                             widget.idAlumn,
-                            int.tryParse(idCtrl.text.trim()) ?? 0,
                             nombreCtrl.text.trim(),
                             apellidoCtrl.text.trim(),
                             int.tryParse(edadCtrl.text.trim()) ?? 0,
                             dropdownValue);
+                        if (respuesta['message'] != null) {
+                          //nombre
+                          if (respuesta['errors']['nombre'] != null) {
+                            errNombre = respuesta['errors']['nombre'][0];
+                          }
+
+                          //apeliido
+                          if (respuesta['errors']['apellido'] != null) {
+                            errApellido = respuesta['errors']['apellido'][0];
+                          }
+                          //edad
+                          if (respuesta['errors']['edad'] != null) {
+                            errEdad = respuesta['errors']['edad'][0];
+                          }
+                          setState(() {});
+                          return;
+                        }
 
                         Navigator.pop(context);
                       },

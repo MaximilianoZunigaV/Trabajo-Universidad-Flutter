@@ -19,9 +19,9 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
   TextEditingController apellidoCtrl = TextEditingController();
   TextEditingController EdadCtrl = TextEditingController();
 
-  String errCodigo = '';
   String errNombre = '';
   String errApellido = '';
+  String errEdad = '';
 
   /////PARA DROPDOWNBUTTON/////
   int dropdownValue = 1;
@@ -93,6 +93,13 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                 decoration: InputDecoration(labelText: 'Edad'),
                 keyboardType: TextInputType.number,
               ),
+              Container(
+                width: double.infinity,
+                child: Text(
+                  errEdad,
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
               Text(''),
               Text(''),
               Text(
@@ -143,6 +150,10 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                       //apeliido
                       if (respuesta['errors']['apellido'] != null) {
                         errApellido = respuesta['errors']['apellido'][0];
+                      }
+                      //edad
+                      if (respuesta['errors']['edad'] != null) {
+                        errEdad = respuesta['errors']['edad'][0];
                       }
                       setState(() {});
                       return;

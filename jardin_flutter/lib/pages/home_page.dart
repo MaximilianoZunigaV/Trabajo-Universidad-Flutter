@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage>
     'https://img.freepik.com/vector-gratis/estudiantes-elementos-sala-jardin-infantes-blanco_1308-55756.jpg?w=2000',
     'https://img.freepik.com/vector-gratis/ninos-maestra-jardin-infantes-patio-recreo-jugando-estudiando-ninos-escuchando-al-educador_316839-1359.jpg?w=2000',
     'https://i.pinimg.com/736x/94/43/b8/9443b8fc18a439388a9ecb715878453c.jpg',
-    'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F285758349%2F502749266395%2F1%2Foriginal.20220516-210722?w=512&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C231%2C626%2C313&s=d62320335936634a9afc2b1c872d3d31'
+    'https://centroactiva.com/wp-content/uploads/2022/02/nin%CC%83os-jugando-en-sala-actividad-infantil-jardines-de-infancia-dibujos-animados-y-nin%CC%83as-preescolar-juegan-juguetes-dibujan-vector-209950932.jpeg'
   ];
 
   void _tabListener() {
@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage>
           backgroundColor: Color.fromARGB(255, 242, 76, 5),
           expandedHeight: 400.0,
           flexibleSpace: FlexibleSpaceBar(
+            centerTitle: true,
             title: Text('Jardin Semillita',
                 style: TextStyle(
                   color: Color.fromARGB(255, 143, 195, 80),

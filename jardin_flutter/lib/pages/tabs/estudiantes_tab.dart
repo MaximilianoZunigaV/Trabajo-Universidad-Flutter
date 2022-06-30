@@ -43,21 +43,24 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
                           ),
                           title:
                               Text('${alumn['nombre']} ${alumn['apellido']}'),
-                          subtitle: Text('ID del Estudiante: ${alumn['id']}'),
                           trailing: Text('Edad: ${alumn['edad']} años'),
                           onLongPress: () {
                             MaterialPageRoute route = MaterialPageRoute(
                               builder: (context) =>
                                   EstudianteEditarPage(alumn['id']),
                             );
-                            Navigator.push(context, route);
+                            Navigator.push(context, route).then((value) {
+                              setState(() {});
+                            });
                           },
                           onTap: () {
                             MaterialPageRoute route = MaterialPageRoute(
                               builder: (context) =>
                                   EstudianteInfoPage(alumn['id']),
                             );
-                            Navigator.push(context, route);
+                            Navigator.push(context, route).then((value) {
+                              setState(() {});
+                            });
                           },
                         ),
                         endActionPane: ActionPane(

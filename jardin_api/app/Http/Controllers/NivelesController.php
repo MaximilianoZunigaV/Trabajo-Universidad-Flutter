@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Nivel;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\NivelesRequest;
 class NivelesController extends Controller
 {
     /**
@@ -23,7 +23,7 @@ class NivelesController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-    public function store(Request $request)
+    public function store(NivelesRequest $request)
     {
         $nivel = new Nivel();
         $nivel->nombre = $request->nombre;
@@ -60,7 +60,7 @@ class NivelesController extends Controller
      * @param  \App\Models\Nivel  $nivel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nivel $nivel)
+    public function update(NivelesRequest $request, Nivel $nivel)
     {
         $nivel->nombre = $request->nombre;
         $nivel->save();

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jardin_flutter/pages/editar/editar_estudiante_page.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class EstudianteInfoPage extends StatefulWidget {
   int idAlumn;
@@ -78,6 +80,25 @@ class _EstudianteInfoPageState extends State<EstudianteInfoPage> {
                   Text('Nombre: ' + nombreText),
                   Text('Apellido: ' + apellidoText),
                   Text('Edad: ' + edadText + ' años'),
+                  Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      child: Text('Editar'),
+                      onPressed: () {
+                        MaterialPageRoute route =
+                            MaterialPageRoute(builder: (context) {
+                          return EstudianteEditarPage(data['id']);
+                        });
+
+                        Navigator.push(context, route).then((value) {
+                          setState(() {});
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(255, 143, 195, 80),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

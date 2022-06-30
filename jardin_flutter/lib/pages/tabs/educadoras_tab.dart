@@ -41,13 +41,15 @@ class _EducadorasTabState extends State<EducadorasTab> {
                             color: Color.fromARGB(255, 143, 195, 80),
                           ),
                           title: Text('${edu['nombre']} ${edu['apellido']}'),
-                          subtitle: Text('ID: ${edu['id']}'),
+                          subtitle: Text(edu['email']),
                           onLongPress: () {
                             MaterialPageRoute route = MaterialPageRoute(
                               builder: (context) =>
                                   EducadoraEditarPage(edu['id']),
                             );
-                            Navigator.push(context, route);
+                            Navigator.push(context, route).then((value) {
+                              setState(() {});
+                            });
                           },
                           onTap: () {
                             MaterialPageRoute route = MaterialPageRoute(

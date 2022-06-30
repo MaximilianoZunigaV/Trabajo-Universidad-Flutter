@@ -18,6 +18,10 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
   TextEditingController apellidoCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
 
+  String errNombre = '';
+  String errApellido = '';
+  String errEmail = '';
+
   final formKey = GlobalKey<FormState>();
 
   /////PARA DROPDOWNBUTTON/////
@@ -65,10 +69,9 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
             );
           }
           var data = snapshot.data;
-          idCtrl.text = data['id'].toString();
-          nombreCtrl.text = data['nombre'];
-          apellidoCtrl.text = data['apellido'];
-          emailCtrl.text = data['email'];
+          String nombreText = data['nombre'];
+          String apellidoText = data['apellido'];
+          String emailText = data['email'];
 
           return Form(
             key: formKey,
@@ -78,15 +81,39 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
                 children: [
                   TextFormField(
                     controller: nombreCtrl,
-                    decoration: InputDecoration(labelText: 'Nombre'),
+                    decoration: InputDecoration(
+                        labelText: 'Nombre', hintText: nombreText),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      errNombre,
+                      style: TextStyle(color: Colors.red),
+                    ),
                   ),
                   TextFormField(
                     controller: apellidoCtrl,
-                    decoration: InputDecoration(labelText: 'Apellido'),
+                    decoration: InputDecoration(
+                        labelText: 'Apellido', hintText: apellidoText),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      errApellido,
+                      style: TextStyle(color: Colors.red),
+                    ),
                   ),
                   TextFormField(
                     controller: emailCtrl,
-                    decoration: InputDecoration(labelText: 'Email'),
+                    decoration: InputDecoration(
+                        labelText: 'Email', hintText: emailText),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      errEmail,
+                      style: TextStyle(color: Colors.red),
+                    ),
                   ),
                   Text(''),
                   Text(
@@ -116,14 +143,33 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       child: Text('Editar'),
-                      onPressed: () {
-                        Providers().educadoraEditar(
-                          widget.idEducadora,
+                      onPressed: () async {
+                        var respuesta = await Providers().educadoraAgregar(
                           nombreCtrl.text.trim(),
                           apellidoCtrl.text.trim(),
                           emailCtrl.text.trim(),
-                          dropdownValue,
+                          dropdownValue, //toma el valor de la id seleccionada (desde el DropDownButton),
+                          //BigInt.from(nivel), //transformar a BigInt
                         );
+
+                        if (respuesta['message'] != null) {
+                          //nombre
+                          if (respuesta['errors']['nombre'] != null) {
+                            errNombre = respuesta['errors']['nombre'][0];
+                          }
+
+                          //apeliido
+                          if (respuesta['errors']['apellido'] != null) {
+                            errApellido = respuesta['errors']['apellido'][0];
+                          }
+                          //email
+                          if (respuesta['errors']['email'] != null) {
+                            errEmail = respuesta['errors']['email'][0];
+                          }
+                          setState(() {});
+                          return;
+                        }
+
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(

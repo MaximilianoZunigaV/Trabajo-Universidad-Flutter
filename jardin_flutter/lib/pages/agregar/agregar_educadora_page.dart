@@ -94,15 +94,6 @@ class _AgregarEducadoraState extends State<AgregarEducadora> {
                 controller: emailCtrl,
                 decoration: InputDecoration(labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
-                // validator: (valor) {
-                //   if (valor == null || valor.isEmpty) {
-                //     return 'Indique su email';
-                //   }
-                //   if (!RegExp(emailRegex).hasMatch(valor)) {
-                //     return 'Formato de email no válido';
-                //   }
-                //   return null;
-                // },
               ),
               Container(
                 width: double.infinity,
@@ -147,7 +138,6 @@ class _AgregarEducadoraState extends State<AgregarEducadora> {
                       emailCtrl.text.trim(),
                       dropdownValue,
                     );
-
                     if (respuesta['message'] != null) {
                       //nombre
                       if (respuesta['errors']['nombre'] != null) {
@@ -157,15 +147,14 @@ class _AgregarEducadoraState extends State<AgregarEducadora> {
                       if (respuesta['errors']['apellido'] != null) {
                         errApellido = respuesta['errors']['apellido'][0];
                       }
-                      // //email
-                      // if (respuesta['errors']['nombre'] != null) {
-                      //   errNombre = respuesta['errors']['nombre'][0];
-                      // }
+                      //email
+                      if (respuesta['errors']['email'] != null) {
+                        errEmail = respuesta['errors']['email'][0];
+                      }
 
                       setState(() {});
                       return;
                     }
-
                     Navigator.pop(context);
                   }, //Fuera de onPressed
                   style: ElevatedButton.styleFrom(

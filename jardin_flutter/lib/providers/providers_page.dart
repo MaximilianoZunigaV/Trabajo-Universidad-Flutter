@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 
@@ -52,8 +53,8 @@ class Providers {
   }
 
   //editar estudiante
-  Future<LinkedHashMap<String, dynamic>> estudianteEditar(int id, int nuevo_id,
-      String nombre, String apellido, int edad, int niveles_id) async {
+  Future<LinkedHashMap<String, dynamic>> estudianteEditar(
+      int id, String nombre, String apellido, int edad, int niveles_id) async {
     var uri = Uri.parse('$apiURL/estudiantes/$id');
     var respuesta = await http.put(uri,
         headers: <String, String>{
@@ -61,8 +62,6 @@ class Providers {
           'Accept': 'application/json'
         },
         body: jsonEncode(<String, dynamic>{
-          'id': id,
-          'nuevo_id': nuevo_id,
           'nombre': nombre,
           'apellido': apellido,
           'edad': edad,
@@ -249,14 +248,14 @@ class Providers {
   }
 
   //retorna datos de 1 evento
-  Future<List<Map<String, dynamic>>> getEvento(int id) async {
+  Future<LinkedHashMap<String, dynamic>> getEvento(int id) async {
     var uri = Uri.parse('$apiURL/eventos/$id');
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {
       return json.decode(respuesta.body);
     } else {
-      return List.empty();
+      return new LinkedHashMap();
     }
   }
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EducadoraRequests extends FormRequest
+class NivelesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class EducadoraRequests extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class EducadoraRequests extends FormRequest
     public function rules()
     {
         return [
-            //
+          
+            'nombre' => 'required|unique:niveles,nombre',
+        ];
+    }
+
+    public function messages(){
+        return [
+            'nombre.unique' => 'El nivel :input ya existe en el sistema',
+            'nombre.required' => 'Indique nombre del nivel',
+           
         ];
     }
 }
