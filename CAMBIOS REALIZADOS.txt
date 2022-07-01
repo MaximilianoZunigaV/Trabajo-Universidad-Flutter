@@ -1,9 +1,0 @@
-No funciona Agregar Evento porque falta hacer que fecha sea un DateTime (en flutter y en api)
-
-Todo lo demas de evento esta funcional (si agregan un evento desde Postman o la BD, si deberia mostrarlos en flutter)
-
-Falta realizar funcion para seleccionar fecha con calendario y colocar la hora (hora actual del pc se me ocurre que seria la mas facil)
-
-fecha esta como Date en la BD (hay que cambiarla a DateTime, para que tambien agregue la hora 
-
-Tuve que cambiar 'cod_estudiante' a un int 'id', asi que deben rehacer la BD y migrar denuevo (hice los cambios correspondientes en flutter y la api)

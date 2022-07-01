@@ -118,19 +118,6 @@ class _AgregarEventoState extends State<AgregarEvento> {
                   Text(ffecha.format(fechaSeleccionada),
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  Spacer(),
-                  TextButton(
-                      child: Icon(MdiIcons.calendar),
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime.now(),
-                        ).then((fecha) {
-                          fechaSeleccionada = fecha ?? fechaSeleccionada;
-                        });
-                      }),
                 ],
               ),
               Text(''),

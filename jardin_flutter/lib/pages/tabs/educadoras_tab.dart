@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:jardin_flutter/pages/agregar/agregar_educadora_page.dart';
 import 'package:jardin_flutter/pages/editar/editar_educadora_page.dart';
+import 'package:jardin_flutter/pages/editar/editar_estudiante_page.dart';
 import 'package:jardin_flutter/pages/info/educadora_info.dart';
+import 'package:jardin_flutter/pages/info/estudiantes_info.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import '../agregar/agregar_estudiante_page.dart';
 
 class EducadorasTab extends StatefulWidget {
   @override
@@ -37,7 +41,7 @@ class _EducadorasTabState extends State<EducadorasTab> {
                       return Slidable(
                         child: ListTile(
                           leading: Icon(
-                            MdiIcons.bookshelf,
+                            MdiIcons.foodApple,
                             color: Color.fromARGB(255, 143, 195, 80),
                           ),
                           title: Text('${edu['nombre']} ${edu['apellido']}'),
@@ -56,7 +60,9 @@ class _EducadorasTabState extends State<EducadorasTab> {
                               builder: (context) =>
                                   EducadoraInfoPage(edu['id']),
                             );
-                            Navigator.push(context, route);
+                            Navigator.push(context, route).then((value) {
+                              setState(() {});
+                            });
                           },
                         ),
                         endActionPane: ActionPane(
@@ -64,14 +70,14 @@ class _EducadorasTabState extends State<EducadorasTab> {
                           children: [
                             SlidableAction(
                               onPressed: (context) {
-                                String codEducadora = edu['id'].toString();
+                                String codEdu = edu['id'].toString();
                                 String nombre = edu['nombre'];
 
                                 confirmDialog(context, nombre).then((confirma) {
                                   if (confirma) {
                                     //borrar
                                     Providers()
-                                        .educadoraBorrar(codEducadora)
+                                        .educadoraBorrar(codEdu)
                                         .then((borradoOk) {
                                       if (borradoOk) {
                                         //pudo borrar

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jardin_flutter/pages/editar/editar_educadora_page.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'dart:convert';
 
@@ -71,13 +72,36 @@ class _EducadoraInfoPageState extends State<EducadoraInfoPage> {
           return Form(
             key: formKey,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(20.0),
               child: ListView(
                 children: [
-                  Text('ID Educadora: ' + idText),
-                  Text('Nombre: ' + nombreText),
-                  Text('Apellido: ' + apellidoText),
-                  Text('Correo: ' + emailText),
+                  Text('General',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  Divider(),
+                  ListTile(title: Text('ID Educadora :  ' + idText)),
+                  ListTile(title: Text('Nombre :  ' + nombreText)),
+                  ListTile(title: Text('Apellido :  ' + apellidoText)),
+                  ListTile(title: Text('Email :  ' + emailText)),
+                  Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      child: Text('Editar'),
+                      onPressed: () {
+                        MaterialPageRoute route =
+                            MaterialPageRoute(builder: (context) {
+                          return EducadoraEditarPage(data['id']);
+                        });
+
+                        Navigator.push(context, route).then((value) {
+                          setState(() {});
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(255, 143, 195, 80),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

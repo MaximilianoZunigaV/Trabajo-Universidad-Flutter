@@ -64,7 +64,7 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
                           },
                         ),
                         endActionPane: ActionPane(
-                          motion: ScrollMotion(),
+                          motion: StretchMotion(),
                           children: [
                             SlidableAction(
                               onPressed: (context) {

@@ -65,7 +65,7 @@ class EducadorasController extends Controller
      * @param  \App\Models\Educadora  $educadora
      * @return \Illuminate\Http\Response
      */
-    public function update(EducadoraRequest $request, Educadora $educadora)
+    public function update(EducadorasRequest $request, Educadora $educadora)
     {
         $educadora -> nombre = $request -> nombre;
         $educadora -> apellido = $request->apellido;
@@ -84,6 +84,6 @@ class EducadorasController extends Controller
      */
     public function destroy($educadora)
     {
-        Estudiante::where('id', $estudiante) -> delete();
+        Educadora::where('id', $educadora) -> delete();
     }
 }

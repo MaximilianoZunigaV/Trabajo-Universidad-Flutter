@@ -1,0 +1,19 @@
+INSERT INTO `niveles` (`id`, `nombre`, `deleted_at`) VALUES (NULL, 'Medio Menor', NULL);
+INSERT INTO `niveles` (`id`, `nombre`, `deleted_at`) VALUES (NULL, 'Medio Mayor', NULL);
+INSERT INTO `niveles` (`id`, `nombre`, `deleted_at`) VALUES (NULL, 'Playgroup', NULL);
+
+INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `edad`, `deleted_at`, `niveles_id`) VALUES (NULL, 'Pablo', 'Gutierrez', '3', NULL, '1');
+INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `edad`, `deleted_at`, `niveles_id`) VALUES (NULL, 'Valentina', 'Morales', '3', NULL, '1');
+INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `edad`, `deleted_at`, `niveles_id`) VALUES (NULL, 'Nicolas', 'Suarez', '4', NULL, '2');
+INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `edad`, `deleted_at`, `niveles_id`) VALUES (NULL, 'Cristian', 'Parra', '4', NULL, '2');
+INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `edad`, `deleted_at`, `niveles_id`) VALUES (NULL, 'Camila', 'Jara', '5', NULL, '3');
+INSERT INTO `estudiantes` (`id`, `nombre`, `apellido`, `edad`, `deleted_at`, `niveles_id`) VALUES (NULL, 'Nicole', 'Molina', '5', NULL, '3');
+
+INSERT INTO `educadoras` (`id`, `nombre`, `apellido`, `email`, `deleted_at`, `niveles_id`) VALUES (NULL, 'Vanesa', 'Castro', 'VCastro@gmail.com', NULL, '1');
+INSERT INTO `educadoras` (`id`, `nombre`, `apellido`, `email`, `deleted_at`, `niveles_id`) VALUES (NULL, 'Lucia', 'Carrasco', 'Lucia.Carrasco@gmail.com', NULL, '2');
+INSERT INTO `educadoras` (`id`, `nombre`, `apellido`, `email`, `deleted_at`, `niveles_id`) VALUES (NULL, 'Martina', 'Alvarez', 'Martina93@gmail.com', NULL, '3');
+
+INSERT INTO `eventos` (`id`, `nombre`, `descripcion`, `fecha`, `deleted_at`, `estudiantes_id`) VALUES (NULL, 'Retiro', 'El estudiante tiene que asistir al dentista', '25-06-2022', NULL, '2');
+INSERT INTO `eventos` (`id`, `nombre`, `descripcion`, `fecha`, `deleted_at`, `estudiantes_id`) VALUES (NULL, 'Accidente', 'Estudiante se lesiona el tobillo jugando con sus compañeros durante el recreo', '29-06-2022', NULL, '5');
+INSERT INTO `eventos` (`id`, `nombre`, `descripcion`, `fecha`, `deleted_at`, `estudiantes_id`) VALUES (NULL, 'Cambio de Nivel', 'Estudiante asciende a un nivel superior', '20-06-2022', NULL, '3');
+INSERT INTO `eventos` (`id`, `nombre`, `descripcion`, `fecha`, `deleted_at`, `estudiantes_id`) VALUES (NULL, 'Otra Causa', 'Estudiante debio ausentarse el dia de hoy, ya que se encuentra mal de salud', '17-06-2022', NULL, '4');

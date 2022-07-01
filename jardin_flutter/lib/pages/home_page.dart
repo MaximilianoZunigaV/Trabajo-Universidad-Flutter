@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jardin_flutter/pages/tabs/educadoras_tab.dart';
 import 'package:jardin_flutter/pages/tabs/estudiantes_tab.dart';
 import 'package:jardin_flutter/pages/tabs/eventos_tab.dart';
+import 'package:jardin_flutter/pages/tabs/hometab_tab.dart';
 import 'package:jardin_flutter/pages/tabs/niveles_tab.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -16,12 +17,12 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
   int index = 0;
-  String image =
-      'https://img.freepik.com/vector-gratis/estudiantes-elementos-sala-jardin-infantes-blanco_1308-55756.jpg?w=2000';
+  String image = 'https://i.postimg.cc/GhWByfgt/card.jpg';
 
   List<String> miImages = [
-    'https://img.freepik.com/vector-gratis/estudiantes-elementos-sala-jardin-infantes-blanco_1308-55756.jpg?w=2000',
-    'https://img.freepik.com/vector-gratis/ninos-maestra-jardin-infantes-patio-recreo-jugando-estudiando-ninos-escuchando-al-educador_316839-1359.jpg?w=2000',
+    'https://i.postimg.cc/GhWByfgt/card.jpg',
+    'https://stjosephsinfants.ie/wp-content/uploads/2021/01/little-school-children-learning_29937-3161.jpg',
+    'https://static.vecteezy.com/system/resources/previews/003/171/581/non_2x/cartoon-female-teacher-holding-book-and-point-to-blackboard-with-rule-vector.jpg',
     'https://i.pinimg.com/736x/94/43/b8/9443b8fc18a439388a9ecb715878453c.jpg',
     'https://centroactiva.com/wp-content/uploads/2022/02/nin%CC%83os-jugando-en-sala-actividad-infantil-jardines-de-infancia-dibujos-animados-y-nin%CC%83as-preescolar-juegan-juguetes-dibujan-vector-209950932.jpeg'
   ];
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: 5, vsync: this);
     tabController!.addListener((_tabListener));
     super.initState();
   }
@@ -54,20 +55,15 @@ class _HomePageState extends State<HomePage>
         SliverAppBar(
           elevation: 0.0,
           pinned: true,
+          title: Text(
+            'Jardin Semillitas',
+            style: TextStyle(color: Colors.transparent),
+          ),
           backgroundColor: Color.fromARGB(255, 242, 76, 5),
           expandedHeight: 400.0,
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,
-            title: Text('Jardin Semillita',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 143, 195, 80),
-                  fontSize: 20,
-                )),
             background: Image.network(image, fit: BoxFit.cover),
-          ),
-          leading: Icon(
-            MdiIcons.seed,
-            color: Color.fromARGB(255, 143, 195, 80),
           ),
         ),
         SliverAppBar(
@@ -82,6 +78,10 @@ class _HomePageState extends State<HomePage>
               isScrollable: true,
               indicatorColor: Colors.red,
               tabs: [
+                Tab(
+                  text: 'Home',
+                  icon: Icon(MdiIcons.home),
+                ),
                 Tab(
                   text: 'Niños',
                   icon: Icon(MdiIcons.humanChild),
@@ -108,6 +108,7 @@ class _HomePageState extends State<HomePage>
           child: Padding(
             padding: EdgeInsets.all(0.0),
             child: TabBarView(controller: tabController, children: [
+              HomeTab(),
               EstudiantesTab(),
               EducadorasTab(),
               EventosTab(),

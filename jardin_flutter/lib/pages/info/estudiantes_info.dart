@@ -73,13 +73,17 @@ class _EstudianteInfoPageState extends State<EstudianteInfoPage> {
           return Form(
             key: formKey,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(20.0),
               child: ListView(
                 children: [
-                  Text('ID Estudiante: ' + idText),
-                  Text('Nombre: ' + nombreText),
-                  Text('Apellido: ' + apellidoText),
-                  Text('Edad: ' + edadText + ' años'),
+                  Text('General',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  Divider(),
+                  ListTile(title: Text('ID Estudiante :  ' + idText)),
+                  ListTile(title: Text('Nombre :  ' + nombreText)),
+                  ListTile(title: Text('Apellido :  ' + apellidoText)),
+                  ListTile(title: Text('Edad :  ' + edadText + ' años')),
                   Container(
                     width: double.infinity,
                     child: ElevatedButton(

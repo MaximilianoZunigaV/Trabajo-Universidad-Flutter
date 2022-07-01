@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:jardin_flutter/pages/agregar/agregar_evento_page.dart';
 import 'package:jardin_flutter/pages/editar/editar_evento_page.dart';
+import 'package:jardin_flutter/pages/info/evento_info.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -42,39 +43,37 @@ class _EventosTabState extends State<EventosTab> {
                           subtitle: Text(
                               'Codigo Estudiante: ${event['estudiantes_id']}'),
                           trailing: Text(event['fecha']),
-                        ),
-                        startActionPane: ActionPane(
-                          motion: ScrollMotion(),
-                          children: [
-                            SlidableAction(
-                              onPressed: (context) {
-                                MaterialPageRoute route = MaterialPageRoute(
-                                  builder: (context) =>
-                                      EventoEditarPage(event['id']),
-                                );
-                                Navigator.push(context, route).then((value) {
-                                  setState(() {});
-                                });
-                              },
-                              backgroundColor: Colors.purple,
-                              icon: MdiIcons.pen,
-                              label: 'Editar',
-                            ),
-                          ],
+                          // onLongPress: () {
+                          //   MaterialPageRoute route = MaterialPageRoute(
+                          //     builder: (context) =>
+                          //         EventoEditarPage(event['id']),
+                          //   );
+                          //   Navigator.push(context, route).then((value) {
+                          //     setState(() {});
+                          //   });
+                          // },
+                          // onTap: () {
+                          //   MaterialPageRoute route = MaterialPageRoute(
+                          //     builder: (context) => EventoInfoPage(event['id']),
+                          //   );
+                          //   Navigator.push(context, route).then((value) {
+                          //     setState(() {});
+                          //   });
+                          // },
                         ),
                         endActionPane: ActionPane(
                           motion: ScrollMotion(),
                           children: [
                             SlidableAction(
                               onPressed: (context) {
-                                String alumnid = event['id'].toString();
+                                String eventId = event['id'].toString();
                                 String nombre = event['nombre'];
 
                                 confirmDialog(context, nombre).then((confirma) {
                                   if (confirma) {
                                     //borrar
                                     Providers()
-                                        .eventoBorrar(alumnid)
+                                        .eventoBorrar(eventId)
                                         .then((borradoOk) {
                                       if (borradoOk) {
                                         //pudo borrar

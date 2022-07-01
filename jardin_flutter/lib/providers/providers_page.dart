@@ -205,7 +205,7 @@ class Providers {
           'niveles_id': niveles_id,
         }));
 
-    return json.decode(respuesta.body);
+    return jsonDecode(respuesta.body);
   }
 
   //borrar educadora
@@ -248,7 +248,8 @@ class Providers {
   }
 
   //retorna datos de 1 evento
-  Future<LinkedHashMap<String, dynamic>> getEvento(int id) async {
+  //Este provider no funciona, no pudimos encontrar una solucion
+  Future getEvento(int id) async {
     var uri = Uri.parse('$apiURL/eventos/$id');
     var respuesta = await http.get(uri);
 

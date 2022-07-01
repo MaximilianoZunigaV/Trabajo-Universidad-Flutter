@@ -5,8 +5,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class EducadoraEditarPage extends StatefulWidget {
-  int idEducadora;
-  EducadoraEditarPage(this.idEducadora, {Key? key}) : super(key: key);
+  int idEdu;
+  EducadoraEditarPage(this.idEdu, {Key? key}) : super(key: key);
 
   @override
   State<EducadoraEditarPage> createState() => _EducadoraEditarPageState();
@@ -58,10 +58,13 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
-        title: Text('Editar Educadora'),
+        title: Text(
+          'Editar Educadora',
+          style: TextStyle(color: Color.fromARGB(255, 143, 195, 80)),
+        ),
       ),
       body: FutureBuilder(
-        future: Providers().getEducadora(widget.idEducadora),
+        future: Providers().getEducadora(widget.idEdu),
         builder: (context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -144,14 +147,12 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
                     child: ElevatedButton(
                       child: Text('Editar'),
                       onPressed: () async {
-                        var respuesta = await Providers().educadoraAgregar(
-                          nombreCtrl.text.trim(),
-                          apellidoCtrl.text.trim(),
-                          emailCtrl.text.trim(),
-                          dropdownValue, //toma el valor de la id seleccionada (desde el DropDownButton),
-                          //BigInt.from(nivel), //transformar a BigInt
-                        );
-
+                        var respuesta = await Providers().educadoraEditar(
+                            widget.idEdu,
+                            nombreCtrl.text.trim(),
+                            apellidoCtrl.text.trim(),
+                            emailCtrl.text.trim(),
+                            dropdownValue);
                         if (respuesta['message'] != null) {
                           //nombre
                           if (respuesta['errors']['nombre'] != null) {
@@ -162,7 +163,7 @@ class _EducadoraEditarPageState extends State<EducadoraEditarPage> {
                           if (respuesta['errors']['apellido'] != null) {
                             errApellido = respuesta['errors']['apellido'][0];
                           }
-                          //email
+                          //edad
                           if (respuesta['errors']['email'] != null) {
                             errEmail = respuesta['errors']['email'][0];
                           }
