@@ -249,7 +249,7 @@ class Providers {
 
   //retorna datos de 1 evento
   //Este provider no funciona, no pudimos encontrar una solucion
-  Future getEvento(int id) async {
+  Future<LinkedHashMap<String, dynamic>> getEvento(int id) async {
     var uri = Uri.parse('$apiURL/eventos/$id');
     var respuesta = await http.get(uri);
 

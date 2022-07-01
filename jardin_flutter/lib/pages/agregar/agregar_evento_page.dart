@@ -118,6 +118,19 @@ class _AgregarEventoState extends State<AgregarEvento> {
                   Text(ffecha.format(fechaSeleccionada),
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Spacer(),
+                  TextButton(
+                      child: Icon(MdiIcons.calendar),
+                      onPressed: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime.now(),
+                        ).then((fecha) {
+                          fechaSeleccionada = fecha ?? fechaSeleccionada;
+                        });
+                      }),
                 ],
               ),
               Text(''),
@@ -158,9 +171,9 @@ class _AgregarEventoState extends State<AgregarEvento> {
 
                     if (respuesta['message'] != null) {
                       //descripcion
-                      // if (respuesta['errors']['descripcion'] != null) {
-                      //   errDescripcion = respuesta['errors']['descripcion'][0];
-                      // }
+                      if (respuesta['errors']['descripcion'] != null) {
+                        errDescripcion = respuesta['errors']['descripcion'][0];
+                      }
                       setState(() {});
                       return;
                     }
