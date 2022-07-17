@@ -23,10 +23,14 @@ class _AgregarEventoState extends State<AgregarEvento> {
   DateTime fechaSeleccionada = DateTime.now();
   var ffecha = DateFormat('dd-MM-yyyy');
   //String afecha = ffecha.format(fechaSeleccionada);
-
   static final DateTime now = DateTime.now();
   static final DateFormat formatter = DateFormat('dd-MM-yyyy');
   final String formatted = formatter.format(now);
+
+  // //fecha
+  // var fhora = DateFormat('hh-mm');
+  // static final DateTime ahora = DateTime.now();
+  // static final DateFormat formato = DateFormat('hh-mm');
 
   //Obtener el valor de id (para dropdownValue)
 

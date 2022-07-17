@@ -1,10 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jardin_flutter/pages/login_page.dart';
 import 'package:jardin_flutter/pages/tabs/educadoras_tab.dart';
 import 'package:jardin_flutter/pages/tabs/estudiantes_tab.dart';
 import 'package:jardin_flutter/pages/tabs/eventos_tab.dart';
 import 'package:jardin_flutter/pages/tabs/hometab_tab.dart';
 import 'package:jardin_flutter/pages/tabs/niveles_tab.dart';
+import 'package:jardin_flutter/pages/tabs/noticias_tab.dart';
+import 'package:jardin_flutter/providers/google_sign_in.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -55,12 +61,44 @@ class _HomePageState extends State<HomePage>
         SliverAppBar(
           elevation: 0.0,
           pinned: true,
-          title: Text(
-            'Jardin Semillitas',
-            style: TextStyle(color: Colors.transparent),
+          title: Row(
+            children: [
+              //Cambiar Icon por un Drawer
+              Icon(
+                MdiIcons.seed,
+                color: Color.fromARGB(255, 143, 195, 80),
+              ),
+              Spacer(),
+              Text('Jardin Semillita'),
+              Spacer(),
+              PopupMenuButton(
+                itemBuilder: (context) => [
+                  // PopupMenuItem(
+                  //   value: 'google',
+                  //   child: Text('Iniciar Sesion con Google'),
+                  // ),
+                  PopupMenuItem(
+                    value: 'logout',
+                    child: Center(
+                      child: Text(
+                        'Cerrar Sesion',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ],
+                onSelected: (opcion) {
+                  if (opcion == 'logout') {
+                    final provider = Provider.of<GoogleSingInProvider>(context,
+                        listen: false);
+                    provider.googleLogout();
+                  }
+                },
+              ),
+            ],
           ),
           backgroundColor: Color.fromARGB(255, 242, 76, 5),
-          expandedHeight: 400.0,
+          expandedHeight: 800.0,
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,
             background: Image.network(image, fit: BoxFit.cover),
@@ -79,7 +117,7 @@ class _HomePageState extends State<HomePage>
               indicatorColor: Colors.red,
               tabs: [
                 Tab(
-                  text: 'Home',
+                  text: 'Noticias',
                   icon: Icon(MdiIcons.home),
                 ),
                 Tab(
@@ -108,7 +146,7 @@ class _HomePageState extends State<HomePage>
           child: Padding(
             padding: EdgeInsets.all(0.0),
             child: TabBarView(controller: tabController, children: [
-              HomeTab(),
+              NoticiasTab(),
               EstudiantesTab(),
               EducadorasTab(),
               EventosTab(),
