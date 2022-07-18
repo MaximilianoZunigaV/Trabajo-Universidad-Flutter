@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jardin_flutter/pages/editar/editar_noticia_page.dart';
 import 'package:jardin_flutter/pages/login_page.dart';
 import 'package:jardin_flutter/providers/google_sign_in.dart';
+import 'package:jardin_flutter/services/firestore_service.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,6 +33,7 @@ class _HomePage2State extends State<HomePage2> {
             Text('Jardin Semillita'),
             Spacer(),
             PopupMenuButton(
+              icon: Icon(MdiIcons.email),
               itemBuilder: (context) => [
                 PopupMenuItem(
                   value: 'google',
@@ -48,6 +52,39 @@ class _HomePage2State extends State<HomePage2> {
                   provider.googleLogin();
                 }
               },
+            ),
+          ],
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(5),
+        child: Column(
+          children: [
+            Expanded(
+              child: StreamBuilder(
+                stream: FirestoreService().noticias(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (!snapshot.hasData ||
+                      snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ListView.separated(
+                    separatorBuilder: (context, index) => Divider(),
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      var noticia = snapshot.data!.docs[index];
+
+                      return ListTile(
+                        leading: Icon(MdiIcons.cube),
+                        title: Text('${noticia['nombre']}'),
+                        subtitle: Text('Fecha: ${noticia['fecha']}'),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ],
         ),

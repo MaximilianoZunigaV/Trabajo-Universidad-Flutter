@@ -37,12 +37,18 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
                       var alumn = snap.data[index];
                       return Slidable(
                         child: ListTile(
+                          tileColor:
+                              Colors.primaries[index % Colors.primaries.length],
                           leading: Icon(
                             MdiIcons.foodApple,
-                            color: Color.fromARGB(255, 143, 195, 80),
+                            color: Colors.white,
                           ),
-                          title:
-                              Text('${alumn['nombre']} ${alumn['apellido']}'),
+                          title: Text(
+                            '${alumn['nombre']} ${alumn['apellido']}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           trailing: Text('Edad: ${alumn['edad']} años'),
                           onLongPress: () {
                             MaterialPageRoute route = MaterialPageRoute(

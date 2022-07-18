@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:jardin_flutter/pages/agregar/agregar_noticias_page.dart';
+import 'package:jardin_flutter/pages/editar/editar_noticia_page.dart';
 import 'package:jardin_flutter/services/firestore_service.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,42 +13,6 @@ class NoticiasTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Text('Ejercicio Firebase'),
-        backgroundColor: Color(0xFF363942),
-        leading: Icon(
-          MdiIcons.firebase,
-          color: Colors.yellow,
-        ),
-        actions: [
-          PopupMenuButton(
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: 'otra',
-                child: Text('Otra opción'),
-              ),
-              PopupMenuItem(
-                value: 'logout',
-                child: Text('Salir'),
-              ),
-            ],
-            onSelected: (opcion) async {
-              // if (opcion == 'logout') {
-              //await FirebaseAuth.instance.signOut();
-
-              //SharedPreferences sp = await SharedPreferences.getInstance();
-              //sp.remove('userEmail');
-
-              // MaterialPageRoute route = MaterialPageRoute(
-              //builder: (context) => LoginPage(),
-              // );
-              //Navigator.pushReplacement(context, route);
-              //}
-            },
-          ),
-        ],
-      ),
       body: Column(
         children: [
           Expanded(
@@ -69,8 +34,7 @@ class NoticiasTab extends StatelessWidget {
                     return ListTile(
                       leading: Icon(MdiIcons.cube),
                       title: Text('${noticia['nombre']}'),
-                      subtitle: Text(
-                          'Texto: ${noticia['texto']} Fecha:\$${noticia['fecha']}'),
+                      subtitle: Text('Fecha: ${noticia['fecha']}'),
                       trailing: TextButton(
                         child: Icon(
                           MdiIcons.trashCan,
@@ -81,12 +45,12 @@ class NoticiasTab extends StatelessWidget {
                           FirestoreService().noticiasBorrar(noticia.id);
                         },
                       ),
-                      // onLongPress: () {
-                      //   MaterialPageRoute route = MaterialPageRoute(
-                      //     builder: (context) => NoticiasEditar(noticia.id),
-                      //   );
-                      //   Navigator.push(context, route);
-                      // },
+                      onLongPress: () {
+                        MaterialPageRoute route = MaterialPageRoute(
+                          builder: (context) => NoticiasEditar(noticia.id),
+                        );
+                        Navigator.push(context, route);
+                      },
                     );
                   },
                 );

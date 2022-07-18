@@ -23,10 +23,11 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
   int index = 0;
-  String image = 'https://i.postimg.cc/GhWByfgt/card.jpg';
+  String image =
+      'https://cdn.discordapp.com/attachments/984198190729424996/998399517168779274/card.jpg';
 
   List<String> miImages = [
-    'https://i.postimg.cc/GhWByfgt/card.jpg',
+    'https://cdn.discordapp.com/attachments/984198190729424996/998399517168779274/card.jpg',
     'https://stjosephsinfants.ie/wp-content/uploads/2021/01/little-school-children-learning_29937-3161.jpg',
     'https://static.vecteezy.com/system/resources/previews/003/171/581/non_2x/cartoon-female-teacher-holding-book-and-point-to-blackboard-with-rule-vector.jpg',
     'https://i.pinimg.com/736x/94/43/b8/9443b8fc18a439388a9ecb715878453c.jpg',
@@ -65,18 +66,15 @@ class _HomePageState extends State<HomePage>
             children: [
               //Cambiar Icon por un Drawer
               Icon(
-                MdiIcons.seed,
+                MdiIcons.home,
                 color: Color.fromARGB(255, 143, 195, 80),
               ),
               Spacer(),
               Text('Jardin Semillita'),
               Spacer(),
               PopupMenuButton(
+                icon: Icon(MdiIcons.emailCheck),
                 itemBuilder: (context) => [
-                  // PopupMenuItem(
-                  //   value: 'google',
-                  //   child: Text('Iniciar Sesion con Google'),
-                  // ),
                   PopupMenuItem(
                     value: 'logout',
                     child: Center(
@@ -118,7 +116,7 @@ class _HomePageState extends State<HomePage>
               tabs: [
                 Tab(
                   text: 'Noticias',
-                  icon: Icon(MdiIcons.home),
+                  icon: Icon(MdiIcons.newspaper),
                 ),
                 Tab(
                   text: 'Niños',
