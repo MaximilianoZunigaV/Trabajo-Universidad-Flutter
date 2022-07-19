@@ -98,7 +98,7 @@ class _EducadoraInfoPageState extends State<EducadoraInfoPage> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 143, 195, 80),
+                        primary: Color.fromARGB(255, 168, 148, 206),
                       ),
                     ),
                   ),
