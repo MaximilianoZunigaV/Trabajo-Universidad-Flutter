@@ -18,11 +18,11 @@ class _NoticiasEditarState extends State<NoticiasEditar> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Editar Noticia'),
-        backgroundColor: Color(0xFF363942),
+        backgroundColor: Color.fromARGB(255, 242, 76, 5),
       ),
       body: Form(
         child: Padding(
-          padding: EdgeInsets.all(5),
+          padding: EdgeInsets.all(8),
           child: FutureBuilder(
               future: FirestoreService().getNoticia(widget.noticiaId),
               builder: (context, AsyncSnapshot snapshot) {
@@ -38,26 +38,31 @@ class _NoticiasEditarState extends State<NoticiasEditar> {
 
                 return ListView(
                   children: [
-                    Container(
-                      width: double.infinity,
-                      height: 50,
-                      child: Row(
-                        children: [
-                          Text(
-                            'Id Producto:',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(widget.noticiaId),
-                        ],
-                      ),
-                    ),
+                    // Container(
+                    //   width: double.infinity,
+                    //   height: 50,
+                    //   child: Row(
+                    //     children: [
+                    //       Text(
+                    //         'Id Producto:',
+                    //         style: TextStyle(fontWeight: FontWeight.bold),
+                    //       ),
+                    //       Text(widget.noticiaId),
+                    //     ],
+                    //   ),
+                    // ),
                     TextFormField(
+                      style: TextStyle(fontSize: 18),
                       controller: nombreCtrl,
                       decoration: InputDecoration(
                         labelText: 'Nombre noticia',
                       ),
                     ),
+                    Container(
+                      height: 8,
+                    ),
                     TextFormField(
+                      style: TextStyle(fontSize: 18),
                       controller: textoCtrl,
                       decoration: InputDecoration(
                         labelText: 'Texto',
@@ -67,9 +72,9 @@ class _NoticiasEditarState extends State<NoticiasEditar> {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.purple,
+                          primary: Color.fromARGB(255, 143, 195, 80),
                         ),
-                        child: Text('Editar Producto'),
+                        child: Text('Editar Noticia'),
                         onPressed: () async {
                           String nombre = nombreCtrl.text.trim();
                           String texto = textoCtrl.text.trim();
