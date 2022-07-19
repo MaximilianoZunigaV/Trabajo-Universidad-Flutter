@@ -17,6 +17,7 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 198, 242, 179),
       body: Padding(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -37,19 +38,16 @@ class _EstudiantesTabState extends State<EstudiantesTab> {
                       var alumn = snap.data[index];
                       return Slidable(
                         child: ListTile(
-                          tileColor:
-                              Colors.primaries[index % Colors.primaries.length],
+                          tileColor: Color.fromARGB(255, 158, 202, 105),
+                          // tileColor:
+                          //     Colors.primaries[index % Colors.primaries.length],
                           leading: Icon(
                             MdiIcons.foodApple,
-                            color: Colors.white,
                           ),
-                          title: Text(
-                            '${alumn['nombre']} ${alumn['apellido']}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          trailing: Text('Edad: ${alumn['edad']} años'),
+                          title:
+                              Text('${alumn['nombre']} ${alumn['apellido']}'),
+                          subtitle: Text('Edad: ${alumn['edad']} años'),
+                          //trailing: Text('Edad: ${alumn['edad']} años'),
                           onLongPress: () {
                             MaterialPageRoute route = MaterialPageRoute(
                               builder: (context) =>

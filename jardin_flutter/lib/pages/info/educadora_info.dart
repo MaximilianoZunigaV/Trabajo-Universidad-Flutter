@@ -48,11 +48,11 @@ class _EducadoraInfoPageState extends State<EducadoraInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 229, 206, 238),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
         title: Text(
           'Información Educadora',
-          style: TextStyle(color: Color.fromARGB(255, 143, 195, 80)),
         ),
       ),
       body: FutureBuilder(

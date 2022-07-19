@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->integer('edad');
+            $table->binary('imagen');
             $table->softDeletes();
             // $table->timestamps();
         });

@@ -14,6 +14,7 @@ class _NivelesTabState extends State<NivelesTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 245, 247, 143),
       body: Padding(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -34,6 +35,9 @@ class _NivelesTabState extends State<NivelesTab> {
                       var level = snap.data[index];
                       return Slidable(
                         child: ListTile(
+                          tileColor: Color.fromARGB(255, 220, 223, 78),
+                          // tileColor:
+                          //     Colors.primaries[index % Colors.primaries.length],
                           leading: Icon(
                             MdiIcons.fruitPineapple,
                             color: Color.fromARGB(255, 143, 195, 80),
@@ -76,7 +80,7 @@ class _NivelesTabState extends State<NivelesTab> {
                                   }
                                 });
                               },
-                              backgroundColor: Colors.red,
+                              backgroundColor: Colors.white,
                               icon: MdiIcons.trashCan,
                               label: 'Borrar',
                             ),

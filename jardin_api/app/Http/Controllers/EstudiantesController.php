@@ -30,6 +30,7 @@ class EstudiantesController extends Controller
         $estudiante -> nombre = $request -> nombre;
         $estudiante -> apellido = $request->apellido;
         $estudiante -> edad = $request-> edad;
+        $estudiante-> imagen = $request ->imagen;
         $estudiante -> niveles_id = $request-> niveles_id;
         $estudiante->save();
 
@@ -59,6 +60,7 @@ class EstudiantesController extends Controller
         $estudiante -> nombre = $request -> nombre;
         $estudiante -> apellido = $request->apellido;
         $estudiante -> edad = $request-> edad;
+        $estudiante-> imagen = $request ->imagen;
         $estudiante -> niveles_id = $request-> niveles_id;
         $estudiante->save();
 

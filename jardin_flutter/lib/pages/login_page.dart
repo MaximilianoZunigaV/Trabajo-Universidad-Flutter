@@ -20,11 +20,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ejercicio Firebase'),
-        backgroundColor: Color(0xFF363942),
+        title: Text('Inicio de Sesion'),
+        backgroundColor: Color.fromARGB(255, 242, 76, 5),
         leading: Icon(
-          MdiIcons.firebase,
-          color: Colors.yellow,
+          MdiIcons.seed,
+          color: Color.fromARGB(255, 143, 195, 80),
         ),
       ),
       body: Padding(
@@ -84,6 +84,8 @@ class _LoginPageState extends State<LoginPage> {
                     setState(() {});
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 143, 195, 80)),
               ),
             ),
             Container(

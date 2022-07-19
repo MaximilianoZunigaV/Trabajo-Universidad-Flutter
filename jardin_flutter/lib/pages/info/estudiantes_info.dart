@@ -49,11 +49,11 @@ class _EstudianteInfoPageState extends State<EstudianteInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 198, 242, 179),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
         title: Text(
           'Información Estudiante',
-          style: TextStyle(color: Color.fromARGB(255, 143, 195, 80)),
         ),
       ),
       body: FutureBuilder(

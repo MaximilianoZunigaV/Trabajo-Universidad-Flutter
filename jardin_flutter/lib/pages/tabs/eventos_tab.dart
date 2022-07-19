@@ -15,6 +15,7 @@ class _EventosTabState extends State<EventosTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 184, 243, 243),
       body: Padding(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -35,6 +36,7 @@ class _EventosTabState extends State<EventosTab> {
                       var event = snap.data[index];
                       return Slidable(
                         child: ListTile(
+                          tileColor: Color.fromARGB(255, 126, 214, 214),
                           leading: Icon(
                             MdiIcons.foodApple,
                             color: Color.fromARGB(255, 143, 195, 80),

@@ -1,0 +1,15 @@
+Para que funcione el log in de Google
+se deben agregar SHA1 y SHA256 al proyecto de firebase.
+
+la otra forma de hacerlo funcionar eso haciendo un proyecto propio en firebase
+y agregarle las fingerprints del pc SHA1 y SHA256
+
+en CMD:
+keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore
+clave: android
+
+agregar fingerprints:
+SHA-1
+SHA-256
+
+agregar google sign in (con pub.dev)

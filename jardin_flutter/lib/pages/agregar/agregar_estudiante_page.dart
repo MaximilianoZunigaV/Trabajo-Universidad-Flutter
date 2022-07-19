@@ -1,4 +1,8 @@
+//import 'dart:html';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jardin_flutter/providers/providers_page.dart';
 
 import 'dart:convert';
@@ -22,6 +26,16 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
   String errNombre = '';
   String errApellido = '';
   String errEdad = '';
+
+  // File? image;
+  // Future pickImage() async {
+  //   final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   if (image == null) return;
+
+  //   final imageTemporary = File(image.path);
+  //   setState(() {
+  //   });
+  // }
 
   /////PARA DROPDOWNBUTTON/////
   int dropdownValue = 1;
@@ -98,6 +112,21 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                 child: Text(
                   errEdad,
                   style: TextStyle(color: Colors.red),
+                ),
+              ),
+              Container(
+                width: 200,
+                child: ElevatedButton(
+                  child: Text(
+                    'Cerrar Sesion',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  }, //Fuera de onPressed
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 143, 195, 80),
+                  ), //Cambiar color del boton
                 ),
               ),
               Text(''),

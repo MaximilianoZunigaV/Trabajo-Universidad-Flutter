@@ -60,7 +60,6 @@ class _EstudianteEditarPageState extends State<EstudianteEditarPage> {
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
         title: Text(
           'Editar Estudiante',
-          style: TextStyle(color: Color.fromARGB(255, 143, 195, 80)),
         ),
       ),
       body: FutureBuilder(
@@ -145,7 +144,7 @@ class _EstudianteEditarPageState extends State<EstudianteEditarPage> {
                   Container(
                     width: double.infinity,
                     child: ElevatedButton(
-                      child: Text('Editar'),
+                      child: Text('Guardar'),
                       onPressed: () async {
                         var respuesta = await Providers().estudianteEditar(
                             widget.idAlumn,

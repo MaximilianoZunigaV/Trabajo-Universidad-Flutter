@@ -20,6 +20,7 @@ class _EducadorasTabState extends State<EducadorasTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 229, 206, 238),
       body: Padding(
         padding: EdgeInsets.all(5),
         child: Column(
@@ -40,9 +41,9 @@ class _EducadorasTabState extends State<EducadorasTab> {
                       var edu = snap.data[index];
                       return Slidable(
                         child: ListTile(
+                          tileColor: Color.fromARGB(255, 168, 148, 206),
                           leading: Icon(
                             MdiIcons.foodApple,
-                            color: Color.fromARGB(255, 143, 195, 80),
                           ),
                           title: Text('${edu['nombre']} ${edu['apellido']}'),
                           subtitle: Text(edu['email']),

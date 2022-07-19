@@ -13,6 +13,7 @@ class NoticiasTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 240, 191, 191),
       body: Column(
         children: [
           Expanded(
@@ -32,13 +33,14 @@ class NoticiasTab extends StatelessWidget {
                     var noticia = snapshot.data!.docs[index];
 
                     return ListTile(
+                      tileColor: Color.fromARGB(255, 219, 150, 150),
                       leading: Icon(MdiIcons.cube),
                       title: Text('${noticia['nombre']}'),
                       subtitle: Text('Fecha: ${noticia['fecha']}'),
                       trailing: TextButton(
                         child: Icon(
                           MdiIcons.trashCan,
-                          color: Colors.red,
+                          color: Colors.white,
                         ),
                         onPressed: () {
                           // print(producto.id);
@@ -57,16 +59,24 @@ class NoticiasTab extends StatelessWidget {
               },
             ),
           ),
+          Container(
+            height: 65,
+            //width: double.infinity,
+            child: FloatingActionButton(
+              //isExtended: false,
+              child: Icon(MdiIcons.plusThick),
+              elevation: 100.0,
+              backgroundColor: Color.fromARGB(255, 242, 76, 5),
+              onPressed: () {
+                MaterialPageRoute route = MaterialPageRoute(
+                  builder: (context) => NoticiasAgregar(),
+                );
+
+                Navigator.push(context, route);
+              },
+            ),
+          ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          MaterialPageRoute route = MaterialPageRoute(
-            builder: (context) => NoticiasAgregar(),
-          );
-          Navigator.push(context, route);
-        },
-        child: Icon(Icons.add),
       ),
     );
   }
