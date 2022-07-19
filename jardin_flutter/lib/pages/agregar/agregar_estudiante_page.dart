@@ -114,22 +114,6 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
                   style: TextStyle(color: Colors.red),
                 ),
               ),
-              Container(
-                width: 200,
-                child: ElevatedButton(
-                  child: Text(
-                    'Cerrar Sesion',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  onPressed: () async {
-                    Navigator.pop(context);
-                  }, //Fuera de onPressed
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 143, 195, 80),
-                  ), //Cambiar color del boton
-                ),
-              ),
-              Text(''),
               Text(''),
               Text(
                 'Nivel',

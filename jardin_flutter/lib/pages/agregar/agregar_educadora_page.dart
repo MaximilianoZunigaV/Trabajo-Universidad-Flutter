@@ -103,7 +103,6 @@ class _AgregarEducadoraState extends State<AgregarEducadora> {
                 ),
               ),
               Text(''),
-              Text(''),
               Text(
                 'Nivel',
                 style: TextStyle(fontSize: 16, color: Colors.black54),
