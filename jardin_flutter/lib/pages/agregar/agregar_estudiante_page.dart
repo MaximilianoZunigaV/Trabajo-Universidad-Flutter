@@ -70,7 +70,7 @@ class _AgregarEstudianteState extends State<AgregarEstudiante> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Estudiante'),
+        title: Text('Agregar Estudiante'),
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
       ),
       body: Form(

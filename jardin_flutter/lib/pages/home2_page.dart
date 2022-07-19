@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jardin_flutter/pages/editar/editar_noticia_page.dart';
 import 'package:jardin_flutter/pages/home_page.dart';
+import 'package:jardin_flutter/pages/info/noticas_logout_info.dart';
+
 import 'package:jardin_flutter/pages/login_page.dart';
 import 'package:jardin_flutter/providers/google_sign_in.dart';
 import 'package:jardin_flutter/services/firestore_service.dart';
@@ -26,7 +28,7 @@ class _HomePage2State extends State<HomePage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange.shade300,
+      backgroundColor: Color.fromARGB(255, 255, 246, 215),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
         title: Row(
@@ -84,32 +86,148 @@ class _HomePage2State extends State<HomePage2> {
                       var noticia = snapshot.data!.docs[index];
 
                       return Container(
-                          height: 240,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(255, 208, 147, 56),
-                                Color.fromARGB(255, 94, 173, 97),
-                              ],
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
+                        // height: 130.0,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              child: Material(
+                                child: Container(
+                                  height: 180,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(255, 255, 190, 92),
+                                        Color.fromARGB(255, 131, 219, 134),
+                                      ],
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                    ),
+                                    /*boxShadow: [
+                                        new BoxShadow(
+                                            color: Color(0xFF363f93)
+                                                .withOpacity(0.3),
+                                            offset: new Offset(-10.0, 0.0),
+                                            blurRadius: 20.0,
+                                            spreadRadius: 4.0)
+                                      ]*/
+                                  ),
+                                ),
+                              ),
                             ),
-                            /*boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 8.0, offset: Offset(0, 5)),
-                              ]*/
-                          ),
-                          child: ListTile(
-                            //leading: Icon(MdiIcons.cube),
-                            title: Text('${noticia['nombre']}'),
-                            subtitle: Text('Fecha: ${noticia['fecha']}'),
-                            textColor: Colors.white,
-                            //tileColor: Color.fromARGB(255, 209, 122, 47),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                            Positioned(
+                              top: 15,
+                              left: 20,
+                              child: Card(
+                                elevation: 10.0,
+                                shadowColor: Color.fromARGB(255, 158, 158, 158)
+                                    .withOpacity(0.5),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: Container(
+                                  height: 120,
+                                  width: 105,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    color: Color.fromARGB(255, 245, 226, 160),
+                                    image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: AssetImage(
+                                          "assets/images/noticias.jpg"),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ));
+                            Positioned(
+                              top: 150,
+                              left: 37,
+                              child: Text(
+                                noticia['fecha'],
+                                style: TextStyle(
+                                    color: Colors.black54, fontSize: 16),
+                              ),
+                            ),
+                            Positioned(
+                              top: 0,
+                              left: 355,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(80),
+                                    ),
+                                    child: ElevatedButton(
+                                      child: Icon(MdiIcons.arrowTopRight),
+                                      onPressed: () {
+                                        MaterialPageRoute route =
+                                            MaterialPageRoute(
+                                          builder: (context) =>
+                                              NoticiasLogOutInfo(noticia.id),
+                                        );
+                                        Navigator.push(context, route)
+                                            .then((value) {
+                                          setState(() {});
+                                        });
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          primary:
+                                              Color.fromARGB(255, 34, 99, 36)),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              top: 10,
+                              left: 140,
+                              child: Container(
+                                  height: 390,
+                                  width: 250,
+                                  child: Column(
+                                    children: [
+                                      ListTile(
+                                        //leading: Text('${noticia['fecha']}'),
+                                        title: Text(
+                                          '${noticia['nombre']}',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+
+                                        //Text('Fecha: ${noticia['fecha']}'),
+                                        textColor: Colors.white,
+
+                                        // subtitle: Text(
+                                        //     //tileColor: Color.fromARGB(255, 209, 122, 47),
+                                        //     ' \n ${noticia['texto']}'),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        onTap: () {
+                                          MaterialPageRoute route =
+                                              MaterialPageRoute(
+                                            builder: (context) =>
+                                                NoticiasLogOutInfo(noticia.id),
+                                          );
+                                          Navigator.push(context, route)
+                                              .then((value) {
+                                            setState(() {});
+                                          });
+                                        },
+                                      )
+                                    ],
+                                  )),
+                            ),
+                          ],
+                        ),
+                      );
                     },
                   );
                 },

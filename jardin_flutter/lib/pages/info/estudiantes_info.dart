@@ -99,7 +99,7 @@ class _EstudianteInfoPageState extends State<EstudianteInfoPage> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 143, 195, 80),
+                        primary: Color.fromARGB(255, 242, 76, 5),
                       ),
                     ),
                   ),

@@ -30,6 +30,7 @@ class EventosController extends Controller
         $evento->nombre = $request->nombre;
         $evento->descripcion = $request -> descripcion;
         $evento->fecha = $request -> fecha;
+        $evento->hora = $request -> hora;
         $evento -> estudiantes_id = $request-> estudiantes_id;
         $evento->save();
         return $evento;

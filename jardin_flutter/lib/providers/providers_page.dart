@@ -108,8 +108,8 @@ class Providers {
   }
 
   //Obtener 1 nivel
-  Future<LinkedHashMap<dynamic, dynamic>> getNivel(int id) async {
-    var uri = Uri.parse('$apiURL/niveles/$id');
+  Future<LinkedHashMap<String, dynamic>> getNivel(int idNivel) async {
+    var uri = Uri.parse('$apiURL/niveles/$idNivel');
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {
@@ -120,8 +120,8 @@ class Providers {
   }
 
   //editar nivel
-  Future<LinkedHashMap<String, dynamic>> nivelEditar(
-      int id, int nuevo_id, String nombre) async {
+  Future<LinkedHashMap<String, dynamic>> NivelEditar(
+      int id, String nombre) async {
     var uri = Uri.parse('$apiURL/niveles/$id');
     var respuesta = await http.put(uri,
         headers: <String, String>{
@@ -129,8 +129,6 @@ class Providers {
           'Accept': 'application/json'
         },
         body: jsonEncode(<String, dynamic>{
-          'id': id,
-          'nuevo_id': nuevo_id,
           'nombre': nombre,
         }));
 
@@ -231,7 +229,7 @@ class Providers {
 
   //agregar evento
   Future<LinkedHashMap<String, dynamic>> eventoAgregar(String nombre,
-      String descripcion, String fecha, int estudiantes_id) async {
+      String descripcion, String fecha, String hora, int estudiantes_id) async {
     var uri = Uri.parse('$apiURL/eventos');
     var respuesta = await http.post(uri,
         headers: <String, String>{
@@ -242,6 +240,7 @@ class Providers {
           'nombre': nombre,
           'descripcion': descripcion,
           'fecha': fecha,
+          'hora': hora,
           'estudiantes_id': estudiantes_id,
         }));
     return json.decode(respuesta.body);
@@ -262,7 +261,7 @@ class Providers {
 
   //editar evento
   Future<LinkedHashMap<String, dynamic>> eventoEditar(int id, String nombre,
-      String descripcion, String fecha, int estudiantes_id) async {
+      String descripcion, String fecha, String hora, int estudiantes_id) async {
     var uri = Uri.parse('$apiURL/eventos/$id');
     var respuesta = await http.put(uri,
         headers: <String, String>{
@@ -273,6 +272,7 @@ class Providers {
           'nombre': nombre,
           'descripcion': descripcion,
           'fecha': fecha,
+          'hora': hora,
           'niveles_id': estudiantes_id,
         }));
 

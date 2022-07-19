@@ -35,8 +35,8 @@ class _NivelEditarPageState extends State<NivelEditarPage> {
             );
           }
           var data = snapshot.data;
-          //idCtrl.text = data['id'].toString();
-          nombreCtrl.text = data['nombre'].toString();
+          idCtrl.text = data['id'].toString();
+          nombreCtrl.text = data['nombre'];
 
           return Form(
             key: formKey,
@@ -59,9 +59,9 @@ class _NivelEditarPageState extends State<NivelEditarPage> {
                     child: ElevatedButton(
                       child: Text('Editar'),
                       onPressed: () {
-                        Providers().nivelEditar(
+                        Providers().NivelEditar(
                             widget.idNivel,
-                            int.tryParse(idCtrl.text.trim()) ?? 0,
+                            // int.tryParse(idCtrl.text.trim()) ?? 0,
                             nombreCtrl.text.trim());
 
                         Navigator.pop(context);

@@ -38,14 +38,14 @@ class _EventosTabState extends State<EventosTab> {
                         child: ListTile(
                           tileColor: Color.fromARGB(255, 126, 214, 214),
                           leading: Icon(
-                            MdiIcons.foodApple,
-                            color: Color.fromARGB(255, 143, 195, 80),
+                            MdiIcons.bookOpenVariant,
                           ),
                           title: Text('Causa: ${event['nombre']}'),
                           subtitle: Text(
                               'Codigo Estudiante: ${event['estudiantes_id']}'),
-                          trailing: Text(event['fecha']),
                           // onLongPress: () {
+                          trailing:
+                              Text('${event['fecha']} \n ${event['hora']}'),
                           //   MaterialPageRoute route = MaterialPageRoute(
                           //     builder: (context) =>
                           //         EventoEditarPage(event['id']),

@@ -62,7 +62,7 @@ class _EventoEditarPageState extends State<EventoEditarPage> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
         title: Text(
-          'Editar Estudiante',
+          'Editar Evento',
           style: TextStyle(color: Color.fromARGB(255, 143, 195, 80)),
         ),
       ),
@@ -79,8 +79,7 @@ class _EventoEditarPageState extends State<EventoEditarPage> {
           String nombreText = data['nombre'];
           descripcionCtrl.text = data['descripcion'];
           String fechaText = data['fecha'];
-          //int eventoId = int.tryParse(idCtrl.text.trim()) ?? 0;
-          //edadCtrl.text = data['edad'].toString();
+          String horaText = data['hora'];
 
           return Form(
             key: formKey,
@@ -123,23 +122,18 @@ class _EventoEditarPageState extends State<EventoEditarPage> {
                   ),
                   Row(
                     children: [
-                      Text('Fecha Actual: ', style: TextStyle(fontSize: 16)),
-                      Text(ffecha.format(fechaSeleccionada),
+                      Text('Fecha de Publicacion Evento: ',
+                          style: TextStyle(fontSize: 16)),
+                      Text(fechaText,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold)),
+                      Text(''),
+                      Text('Hora de Publicacion Evento: ',
+                          style: TextStyle(fontSize: 16)),
+                      Text(horaText,
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold)),
                       Spacer(),
-                      TextButton(
-                          child: Icon(MdiIcons.calendar),
-                          onPressed: () {
-                            showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(2000),
-                              lastDate: DateTime.now(),
-                            ).then((fecha) {
-                              fechaSeleccionada = fecha ?? fechaSeleccionada;
-                            });
-                          }),
                     ],
                   ),
                   Container(),
@@ -163,7 +157,7 @@ class _EventoEditarPageState extends State<EventoEditarPage> {
                         return DropdownMenuItem(
                           value: alumnos['id'], //toma el valor id
                           child: Text(
-                              alumnos['nombre']), //muesta en pantalla el nombre
+                              '[${alumnos['id']}] ${alumnos['nombre']} ${alumnos['apellido']}'), //muesta en pantalla el nombre
                         );
                       }).toList()),
                   Container(
@@ -175,7 +169,8 @@ class _EventoEditarPageState extends State<EventoEditarPage> {
                             widget.idEvento,
                             dropdownCausa,
                             descripcionCtrl.text.trim(),
-                            fechaSeleccionada.toString(),
+                            fechaText,
+                            horaText,
                             alumnId);
 
                         Navigator.pop(context);

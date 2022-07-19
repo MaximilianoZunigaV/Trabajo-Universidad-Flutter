@@ -41,9 +41,9 @@ class _EducadorasTabState extends State<EducadorasTab> {
                       var edu = snap.data[index];
                       return Slidable(
                         child: ListTile(
-                          tileColor: Color.fromARGB(255, 168, 148, 206),
+                          tileColor: Color.fromARGB(255, 177, 163, 204),
                           leading: Icon(
-                            MdiIcons.foodApple,
+                            MdiIcons.faceWoman,
                           ),
                           title: Text('${edu['nombre']} ${edu['apellido']}'),
                           subtitle: Text(edu['email']),

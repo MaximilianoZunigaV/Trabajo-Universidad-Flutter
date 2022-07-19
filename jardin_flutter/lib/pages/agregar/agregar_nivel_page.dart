@@ -19,7 +19,7 @@ class _AgregarNivelState extends State<AgregarNivel> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nivel'),
+        title: Text('Agregar Nivel'),
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
       ),
       body: Form(

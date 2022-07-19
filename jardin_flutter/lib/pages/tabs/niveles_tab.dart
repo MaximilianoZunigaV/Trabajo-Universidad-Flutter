@@ -39,17 +39,17 @@ class _NivelesTabState extends State<NivelesTab> {
                           // tileColor:
                           //     Colors.primaries[index % Colors.primaries.length],
                           leading: Icon(
-                            MdiIcons.fruitPineapple,
-                            color: Color.fromARGB(255, 143, 195, 80),
+                            MdiIcons.school,
                           ),
                           title: Text(level['nombre']),
                           subtitle: Text('ID del Nivel: ${level['id']}'),
                           onLongPress: () {
-                            MaterialPageRoute route = MaterialPageRoute(
-                              builder: (context) =>
-                                  NivelEditarPage(level['id']),
-                            );
-                            Navigator.push(context, route);
+                            // MaterialPageRoute route = MaterialPageRoute(
+                            //   builder: (context) =>
+                            //       NivelEditarPage(level['id']),
+                            // );
+                            // Navigator.push(context, route);
+                            print('Editar Niveles no esta funcionando :(');
                           },
                         ),
                         endActionPane: ActionPane(

@@ -27,10 +27,11 @@ class _AgregarEventoState extends State<AgregarEvento> {
   static final DateFormat formatter = DateFormat('dd-MM-yyyy');
   final String formatted = formatter.format(now);
 
-  // //fecha
-  // var fhora = DateFormat('hh-mm');
-  // static final DateTime ahora = DateTime.now();
-  // static final DateFormat formato = DateFormat('hh-mm');
+  //fecha
+  var fhora = DateFormat('hh:mm');
+  static final DateTime hnow = DateTime.now();
+  static final DateFormat hformatter = DateFormat('hh:mm');
+  final String hformatted = hformatter.format(now);
 
   //Obtener el valor de id (para dropdownValue)
 
@@ -67,7 +68,7 @@ class _AgregarEventoState extends State<AgregarEvento> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Evento'),
+        title: Text('Agregar Evento'),
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
       ),
       body: Form(
@@ -122,19 +123,19 @@ class _AgregarEventoState extends State<AgregarEvento> {
                   Text(ffecha.format(fechaSeleccionada),
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  Spacer(),
-                  TextButton(
-                      child: Icon(MdiIcons.calendar),
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime.now(),
-                        ).then((fecha) {
-                          fechaSeleccionada = fecha ?? fechaSeleccionada;
-                        });
-                      }),
+                  // Spacer(),
+                  // TextButton(
+                  //     child: Icon(MdiIcons.calendar),
+                  //     onPressed: () {
+                  //       showDatePicker(
+                  //         context: context,
+                  //         initialDate: DateTime.now(),
+                  //         firstDate: DateTime(2000),
+                  //         lastDate: DateTime.now(),
+                  //       ).then((fecha) {
+                  //         fechaSeleccionada = fecha ?? fechaSeleccionada;
+                  //       });
+                  //     }),
                 ],
               ),
               Text(''),
@@ -143,7 +144,6 @@ class _AgregarEventoState extends State<AgregarEvento> {
                 style: TextStyle(fontSize: 16, color: Colors.black54),
               ),
               DropdownButton(
-                  //Nuevo Widget :D //Agregar para que sea con base de datos
                   isExpanded: true,
                   value: alumnId,
                   hint: Text('Seleccione un estudiante'),
@@ -157,7 +157,7 @@ class _AgregarEventoState extends State<AgregarEvento> {
                     return DropdownMenuItem(
                       value: estudiantes['id'], //toma el codigo del estudiante
                       child: Text(
-                          estudiantes['nombre']), //muesta en pantalla el nombre
+                          '[${estudiantes['id']}] ${estudiantes['nombre']} ${estudiantes['apellido']}'), //muesta en pantalla el nombre
                     );
                   }).toList()),
               Container(
@@ -169,6 +169,7 @@ class _AgregarEventoState extends State<AgregarEvento> {
                       dropdownCausa,
                       descripcionCtrl.text.trim(),
                       formatted,
+                      hformatted,
                       alumnId, //toma el valor de la id seleccionada (desde el DropDownButton),
                       //BigInt.from(nivel), //transformar a BigInt
                     );

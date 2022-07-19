@@ -25,18 +25,17 @@ class _NoticiasAgregarState extends State<NoticiasAgregar> {
 
   static final DateTime hnow = DateTime.now();
   static final DateFormat hformatter = DateFormat('hh:mm');
-  final String hformatted = hformatter.format(now);
+  final String hformatted = hformatter.format(hnow);
 
   @override
   Widget build(BuildContext context) {
     TextEditingController nombreCtrl = TextEditingController();
     TextEditingController textoCtrl = TextEditingController();
-    TextEditingController fechaCtrl = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Agregar Noticias'),
-        backgroundColor: Color(0xFF363942),
+        title: Text('Agregar Noticia'),
+        backgroundColor: Color.fromARGB(255, 242, 76, 5),
       ),
       body: Form(
         child: Padding(
@@ -46,7 +45,7 @@ class _NoticiasAgregarState extends State<NoticiasAgregar> {
               TextFormField(
                 controller: nombreCtrl,
                 decoration: InputDecoration(
-                  labelText: 'Nombre Noticia',
+                  labelText: 'Titulo Noticia',
                 ),
               ),
               TextFormField(
@@ -55,27 +54,16 @@ class _NoticiasAgregarState extends State<NoticiasAgregar> {
                   labelText: 'Texto',
                 ),
               ),
+              Text(''),
               Row(
                 children: [
                   Text('Fecha Actual: ', style: TextStyle(fontSize: 16)),
-                  Text(ffecha.format(fechaSeleccionada),
+                  Text(ffecha.format(now),
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  Spacer(),
-                  TextButton(
-                      child: Icon(MdiIcons.calendar),
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime.now(),
-                        ).then((fecha) {
-                          fechaSeleccionada = fecha ?? fechaSeleccionada;
-                        });
-                      }),
                 ],
               ),
+              Text(''),
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -89,6 +77,9 @@ class _NoticiasAgregarState extends State<NoticiasAgregar> {
                         .noticiasAgregar(nombre, texto, fecha, hora);
                     Navigator.pop(context);
                   },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 143, 195, 80),
+                  ),
                 ),
               ),
             ],
