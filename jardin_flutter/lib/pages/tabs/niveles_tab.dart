@@ -80,7 +80,7 @@ class _NivelesTabState extends State<NivelesTab> {
                                   }
                                 });
                               },
-                              backgroundColor: Colors.white,
+                              backgroundColor: Colors.red,
                               icon: MdiIcons.trashCan,
                               label: 'Borrar',
                             ),

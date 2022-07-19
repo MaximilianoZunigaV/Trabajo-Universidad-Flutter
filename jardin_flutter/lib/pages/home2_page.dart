@@ -84,7 +84,7 @@ class _HomePage2State extends State<HomePage2> {
                       var noticia = snapshot.data!.docs[index];
 
                       return Container(
-                          height: 140.0,
+                          height: 240,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             gradient: LinearGradient(
@@ -118,27 +118,9 @@ class _HomePage2State extends State<HomePage2> {
             Container(
               padding: EdgeInsets.all(15),
               //color: Colors.orange.shade200,
-              height: 130,
+              height: 90,
               child: ListView(
                 children: [
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        onPrimary: Colors.white,
-                        minimumSize: Size(double.infinity, 42)),
-                    icon: Icon(MdiIcons.email),
-                    label: Text('Iniciar Sesion'),
-                    onPressed: () {
-                      MaterialPageRoute route =
-                          MaterialPageRoute(builder: (context) {
-                        return LoginPage();
-                      });
-
-                      Navigator.push(context, route).then((value) {
-                        setState(() {});
-                      });
-                    },
-                  ),
                   ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                         primary: Colors.white,
@@ -155,16 +137,6 @@ class _HomePage2State extends State<HomePage2> {
                           listen: false);
                       provider.googleLogin();
                     },
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      error,
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 16,
-                      ),
-                    ),
                   ),
                 ],
               ),
