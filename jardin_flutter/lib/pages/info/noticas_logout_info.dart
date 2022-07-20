@@ -20,14 +20,13 @@ class _NoticiasLogOutInfoState extends State<NoticiasLogOutInfo> {
     TextEditingController horaCtrl = TextEditingController();
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 240, 191, 191),
       appBar: AppBar(
-        title: Text('Informacion Noticia'),
+        title: Text(' Jardin Semillita'),
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
       ),
       body: Form(
         child: Padding(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(0),
           child: FutureBuilder(
               future: FirestoreService().getNoticia(widget.noticiaId),
               builder: (context, AsyncSnapshot snapshot) {
@@ -43,67 +42,82 @@ class _NoticiasLogOutInfoState extends State<NoticiasLogOutInfo> {
                 fechaCtrl.text = noticia['fecha'];
                 horaCtrl.text = noticia['hora'];
 
-                return ListView(
-                  padding: EdgeInsets.all(20.0),
-                  children: [
-                    Text('General',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
-                    Divider(),
-                    ListTile(
-                      leading: Text(
-                        'ID noticia: ',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                return Container(
+                  child: Stack(
+                    children: [
+                      Material(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(0),
+                            gradient: LinearGradient(
+                              colors: [
+                                Color.fromARGB(255, 255, 190, 92),
+                                Color.fromARGB(255, 131, 219, 134),
+                              ],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ),
+                          ),
+                          child: Column(children: [
+                            Text(''),
+                            Positioned(
+                              top: 200,
+                              child: ListTile(
+                                title: Text(
+                                  nombreCtrl.text,
+                                  style: TextStyle(fontSize: 24, shadows: [
+                                    Shadow(
+                                      color: Color.fromARGB(255, 220, 226, 213),
+                                      offset: Offset(1, 2),
+                                      blurRadius: 4,
+                                    ),
+                                    Shadow(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      offset: Offset(2, 1),
+                                      blurRadius: 6,
+                                    ),
+                                  ]),
+                                ),
+                              ),
+                            ),
+                            Text(''),
+                            Positioned(
+                              top: 200,
+                              child: ListTile(
+                                title: Text(
+                                  textoCtrl.text,
+                                  style: TextStyle(fontSize: 18, shadows: [
+                                    Shadow(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      offset: Offset(1, 2),
+                                      blurRadius: 8,
+                                    ),
+                                  ]),
+                                ),
+                              ),
+                            ),
+                            Spacer(),
+                            Positioned(
+                              top: 10,
+                              left: 355,
+                              child: Text(
+                                fechaCtrl.text,
+                                style: TextStyle(fontSize: 16, shadows: [
+                                  Shadow(
+                                    color: Color.fromARGB(255, 245, 245, 245),
+                                    offset: Offset(2, 1),
+                                    blurRadius: 6,
+                                  ),
+                                ]),
+                              ),
+                            ),
+                            Text(''),
+                          ]),
+                        ),
                       ),
-                      title: Text(widget.noticiaId),
-                    ),
-                    ListTile(
-                        leading: Text(
-                          'Titulo: ',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        title: Text(nombreCtrl.text)),
-                    ListTile(
-                        leading: Text(
-                          'Texto: ',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        title: Text(textoCtrl.text)),
-                    ListTile(
-                        leading: Text(
-                          'Fecha Publicada: ',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        title: Text(fechaCtrl.text)),
-                    ListTile(
-                        leading: Text(
-                          'Hora Publicada: ',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        title: Text(horaCtrl.text)),
-                    Container(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 242, 76, 5),
-                        ),
-                        child: Text('Editar Noticia'),
-                        onPressed: () async {
-                          MaterialPageRoute route = MaterialPageRoute(
-                            builder: (context) => NoticiasEditar(noticia.id),
-                          );
-                          Navigator.push(context, route).then((value) {
-                            setState(() {});
-                          });
-                        },
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               }),
         ),

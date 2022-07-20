@@ -28,7 +28,7 @@ class _HomePage2State extends State<HomePage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 246, 215),
+      backgroundColor: Color.fromARGB(255, 232, 252, 196),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 242, 76, 5),
         title: Row(
@@ -91,10 +91,17 @@ class _HomePage2State extends State<HomePage2> {
                           children: [
                             Positioned(
                               child: Material(
+                                elevation: 10.0,
+                                shadowColor: Color.fromARGB(255, 235, 213, 136)
+                                    .withOpacity(0.5),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
                                 child: Container(
                                   height: 180,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
+                                    color: Color.fromARGB(255, 255, 246, 215),
+                                    borderRadius: BorderRadius.circular(20.0),
                                     gradient: LinearGradient(
                                       colors: [
                                         Color.fromARGB(255, 255, 190, 92),
@@ -236,7 +243,7 @@ class _HomePage2State extends State<HomePage2> {
             Container(
               padding: EdgeInsets.all(15),
               //color: Colors.orange.shade200,
-              height: 90,
+              height: 80,
               child: ListView(
                 children: [
                   ElevatedButton.icon(

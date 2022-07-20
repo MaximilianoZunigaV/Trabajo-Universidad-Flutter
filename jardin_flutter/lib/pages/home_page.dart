@@ -4,7 +4,6 @@ import 'package:jardin_flutter/pages/login_page.dart';
 import 'package:jardin_flutter/pages/tabs/educadoras_tab.dart';
 import 'package:jardin_flutter/pages/tabs/estudiantes_tab.dart';
 import 'package:jardin_flutter/pages/tabs/eventos_tab.dart';
-import 'package:jardin_flutter/pages/tabs/hometab_tab.dart';
 import 'package:jardin_flutter/pages/tabs/niveles_tab.dart';
 import 'package:jardin_flutter/pages/tabs/noticias_tab.dart';
 import 'package:jardin_flutter/providers/google_sign_in.dart';
