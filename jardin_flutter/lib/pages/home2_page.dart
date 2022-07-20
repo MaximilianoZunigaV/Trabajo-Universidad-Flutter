@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jardin_flutter/pages/editar/editar_noticia_page.dart';
 import 'package:jardin_flutter/pages/home_page.dart';
 import 'package:jardin_flutter/pages/info/noticas_logout_info.dart';
+import 'package:jardin_flutter/pages/info/noticias_2_info.dart';
 
 import 'package:jardin_flutter/pages/login_page.dart';
 import 'package:jardin_flutter/providers/google_sign_in.dart';
@@ -172,7 +173,7 @@ class _HomePage2State extends State<HomePage2> {
                                         MaterialPageRoute route =
                                             MaterialPageRoute(
                                           builder: (context) =>
-                                              NoticiasLogOutInfo(noticia.id),
+                                              Noticias2Info(noticia.id),
                                         );
                                         Navigator.push(context, route)
                                             .then((value) {
@@ -221,7 +222,7 @@ class _HomePage2State extends State<HomePage2> {
                                           MaterialPageRoute route =
                                               MaterialPageRoute(
                                             builder: (context) =>
-                                                NoticiasLogOutInfo(noticia.id),
+                                                Noticias2Info(noticia.id),
                                           );
                                           Navigator.push(context, route)
                                               .then((value) {

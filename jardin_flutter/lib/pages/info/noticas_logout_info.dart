@@ -98,19 +98,19 @@ class _NoticiasLogOutInfoState extends State<NoticiasLogOutInfo> {
                               ),
                             ),
                             Spacer(),
-                            Positioned(
-                              top: 10,
-                              left: 355,
-                              child: Text(
-                                fechaCtrl.text,
-                                style: TextStyle(fontSize: 16, shadows: [
-                                  Shadow(
-                                    color: Color.fromARGB(255, 245, 245, 245),
-                                    offset: Offset(2, 1),
-                                    blurRadius: 6,
-                                  ),
-                                ]),
-                              ),
+                            Text(
+                              'Noticia publicada el dia ' +
+                                  fechaCtrl.text +
+                                  ' a las ' +
+                                  horaCtrl.text +
+                                  'hrs',
+                              style: TextStyle(fontSize: 16, shadows: [
+                                Shadow(
+                                  color: Colors.white,
+                                  offset: Offset(2, 1),
+                                  blurRadius: 6,
+                                )
+                              ]),
                             ),
                             Text(''),
                           ]),
